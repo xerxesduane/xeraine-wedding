@@ -3,466 +3,453 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xerxes &amp; Loraine &middot; The Wedding Album</title>
-<meta name="description" content="Photos and videos from the wedding of Xerxes & Loraine — August 7, 2026, Lazuri Hotel Resort, Tagaytay. Relive the day, share the shots you took, and journey with us into what comes next.">
+<title>Xerxes &amp; Loraine &middot; Our Wedding Photos</title>
+<meta name="description" content="Photos and videos from the wedding of Xerxes & Loraine — 7 August 2026, Lazuri Hotel Resort, Tagaytay. Look through the album, add your own photos, and stay in touch.">
 <!-- Unlisted: no password, but kept out of search results. -->
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 <meta name="googlebot" content="noindex, nofollow, noimageindex">
+<meta name="theme-color" content="#1F2D4D">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Xerxes &amp; Loraine · The Wedding Album">
-<meta property="og:description" content="Relive August 7, 2026 — photos, videos, and the shots you took. Thank you for being there.">
+<meta property="og:title" content="Xerxes &amp; Loraine · Our Wedding Photos">
+<meta property="og:description" content="Look through the album from 7 August 2026, and add the photos you took.">
 <meta property="og:image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/v1779567339/preview_image_evwxst.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Xerxes &amp; Loraine · The Wedding Album">
-<meta name="twitter:description" content="Relive August 7, 2026 — photos, videos, and the shots you took.">
+<meta name="twitter:title" content="Xerxes &amp; Loraine · Our Wedding Photos">
+<meta name="twitter:description" content="Look through the album from 7 August 2026, and add the photos you took.">
 <meta name="twitter:image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/v1779567339/preview_image_evwxst.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  /* =====================================================================
+     Designed mobile-first and for readers of every age:
+       · nothing smaller than 16px, body copy sits at 18–19px
+       · every button and link is at least 56px tall to tap
+       · text/background contrast beats WCAG AA everywhere
+       · motion is a single gentle fade, and it stops entirely if the
+         reader has "reduce motion" switched on
+     Palette: navy · burgundy · beige · grey
+     ===================================================================== */
   :root{
-    --charcoal:#1f2d4d;
-    --charcoal-soft:#465579;
-    --gray:#D3D3D3;
-    --silver:#C0C0C0;
+    --navy:#1F2D4D;
+    --navy-deep:#16203A;
+    --burgundy:#7B2D3B;
+    --burgundy-deep:#5D2029;
+    --beige:#F3EDE4;
+    --beige-deep:#E7DECF;
+    --grey:#4E5666;        /* secondary text — 7:1 on beige */
+    --grey-line:#CFC8BC;
     --white:#FFFFFF;
-    --burgundy:#7b2d3b;
-    --burgundy-deep:#5d2029;
-    --gold:#bf9f4f;
-    --gold-soft:#c8a85c;
-    --paper:#fbfbfa;
-    --mist:#f4f5f6;
-    --line:rgba(31,45,77,.12);
+    --focus:#7B2D3B;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
   body{
-    font-family:'Jost',sans-serif;
-    color:var(--charcoal);
-    background:var(--paper);
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    font-family:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:18px; line-height:1.75;
+    color:var(--navy); background:var(--white);
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
   img{display:block;max-width:100%;}
-  a{color:inherit;}
+  a{color:var(--burgundy);}
 
-  /* ============ SHARED ============ */
-  .wrap{width:min(1180px,92vw);margin:0 auto;}
-  .section{padding:clamp(64px,9vw,120px) 0;}
-  .section.alt{background:var(--mist);}
+  /* visible keyboard focus — important for anyone not using a mouse */
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:3px solid var(--focus); outline-offset:3px; border-radius:2px;
+  }
+  .skip{
+    position:absolute;left:-9999px;top:0;z-index:300;background:var(--burgundy);color:#fff;
+    padding:16px 24px;text-decoration:none;font-size:17px;
+  }
+  .skip:focus{left:0;}
+
+  .wrap{width:min(1120px,100% - 40px);margin:0 auto;}
+  .narrow{width:min(700px,100% - 40px);margin:0 auto;}
+  .section{padding:56px 0;}
+  @media (min-width:760px){ .section{padding:88px 0;} }
+  .section.beige{background:var(--beige);}
+  .section.deep{background:var(--navy);color:#fff;}
+
+  /* ---- type ---- */
   .eyebrow{
-    font-size:clamp(10px,2vw,12px); letter-spacing:.5em; text-transform:uppercase;
-    color:var(--gold); margin-bottom:14px;
+    font-size:16px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--burgundy); font-weight:700; margin-bottom:12px;
   }
-  h2.title{
-    font-family:'Cormorant Garamond',serif; font-weight:500;
-    font-size:clamp(30px,5.4vw,54px); line-height:1.1; color:var(--burgundy);
-  }
-  .lede{
-    margin-top:16px; max-width:62ch; font-weight:300; line-height:1.85;
-    font-size:clamp(15px,1.7vw,17px); color:var(--charcoal-soft);
-  }
-  .center{text-align:center;} .center .lede{margin-left:auto;margin-right:auto;}
-  .rule{width:70px;height:1px;background:var(--gold);margin:22px 0;}
+  h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.15;}
+  h2.title{font-size:32px;color:var(--navy);}
+  @media (min-width:760px){ h2.title{font-size:44px;} }
+  .section.deep h2.title{color:#fff;}
+  .section.deep .eyebrow{color:var(--beige-deep);}
+  p.lede{margin-top:18px;font-size:19px;line-height:1.8;color:var(--grey);}
+  .section.deep p.lede{color:rgba(255,255,255,.9);}
+  p.lede + p.lede{margin-top:16px;}
+  .center{text-align:center;}
+  .center p.lede{margin-left:auto;margin-right:auto;max-width:60ch;}
+  .rule{width:64px;height:2px;background:var(--burgundy);margin:20px 0;}
   .center .rule{margin-left:auto;margin-right:auto;}
+  .section.deep .rule{background:var(--beige-deep);}
 
+  /* ---- buttons: large, high contrast, full width on a phone ---- */
   .btn{
-    display:inline-flex; align-items:center; gap:10px;
-    padding:15px 30px; border:1px solid var(--burgundy); background:var(--burgundy);
-    color:#fff; font-size:12.5px; letter-spacing:.22em; text-transform:uppercase;
-    text-decoration:none; cursor:pointer; transition:.28s ease; border-radius:2px;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    width:100%; min-height:58px; padding:16px 28px;
+    border:2px solid var(--burgundy); background:var(--burgundy); color:#fff;
+    font-family:inherit; font-size:17px; font-weight:700; letter-spacing:.02em;
+    text-decoration:none; text-align:center; cursor:pointer; border-radius:4px;
+    transition:background .2s ease,color .2s ease;
   }
-  .btn:hover{background:var(--burgundy-deep);border-color:var(--burgundy-deep);transform:translateY(-2px);}
-  .btn.ghost{background:transparent;color:var(--burgundy);}
-  .btn.ghost:hover{background:var(--burgundy);color:#fff;}
-  .btn.gold{background:var(--gold);border-color:var(--gold);color:#fff;}
-  .btn.gold:hover{background:var(--gold-soft);border-color:var(--gold-soft);}
-  .btn-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;}
-  .center .btn-row{justify-content:center;}
+  .btn:hover{background:var(--burgundy-deep);border-color:var(--burgundy-deep);color:#fff;}
+  .btn.quiet{background:var(--white);color:var(--burgundy);}
+  .btn.quiet:hover{background:var(--burgundy);color:#fff;}
+  .btn.navy{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .btn.navy:hover{background:var(--navy-deep);border-color:var(--navy-deep);}
+  .btn.on-dark{background:transparent;border-color:#fff;color:#fff;}
+  .btn.on-dark:hover{background:#fff;color:var(--navy);}
+  .btn-row{display:flex;flex-direction:column;gap:14px;margin-top:28px;}
+  @media (min-width:620px){
+    .btn{width:auto;}
+    .btn-row{flex-direction:row;flex-wrap:wrap;}
+    .center .btn-row{justify-content:center;}
+  }
 
-  .reveal-on-scroll{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.25,1);}
-  .reveal-on-scroll.in{opacity:1;transform:none;}
+  /* ---- gentle reveal ---- */
+  /* only hide content once JS is confirmed running, so a script
+     failure can never leave the page blank */
+  .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease;}
+  .js .reveal.in{opacity:1;transform:none;}
   @media (prefers-reduced-motion:reduce){
-    .reveal-on-scroll{opacity:1;transform:none;transition:none;}
+    .js .reveal{opacity:1;transform:none;transition:none;}
     html{scroll-behavior:auto;}
+    *{animation:none !important;}
   }
 
-  /* ============ NAV ============ */
+  /* ============ HEADER ============ */
   .nav{
-    position:fixed; top:0; left:0; right:0; z-index:80;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px clamp(16px,4vw,40px);
-    background:rgba(251,251,250,0); backdrop-filter:blur(0px);
-    transition:background .4s ease,backdrop-filter .4s ease,box-shadow .4s ease;
+    position:sticky; top:0; z-index:80; background:var(--white);
+    border-bottom:1px solid var(--grey-line);
   }
-  .nav.solid{background:rgba(251,251,250,.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line);}
+  .nav .bar{
+    width:min(1120px,100% - 32px); margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    min-height:64px;
+  }
   .nav .mark{
-    font-family:'Cormorant Garamond',serif; font-size:19px; letter-spacing:.12em;
-    color:#fff; text-decoration:none; transition:color .4s ease; white-space:nowrap;
+    font-family:'Cormorant Garamond',Georgia,serif; font-size:22px; font-weight:600;
+    color:var(--navy); text-decoration:none; white-space:nowrap; padding:8px 0;
   }
-  .nav.solid .mark{color:var(--burgundy);}
-  .nav .links{display:flex;gap:clamp(14px,2.4vw,30px);align-items:center;}
+  .nav .links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .nav .links::-webkit-scrollbar{display:none;}
   .nav .links a{
-    font-size:11px; letter-spacing:.24em; text-transform:uppercase; text-decoration:none;
-    color:#fff; opacity:.92; transition:color .4s ease,opacity .25s ease;
+    display:flex; align-items:center; min-height:52px; padding:0 12px;
+    font-size:16px; font-weight:700; color:var(--navy); text-decoration:none;
+    white-space:nowrap; border-bottom:3px solid transparent;
   }
-  .nav.solid .links a{color:var(--charcoal);}
-  .nav .links a:hover{opacity:1;color:var(--gold);}
-  @media (max-width:720px){ .nav .links a.hide-sm{display:none;} }
+  .nav .links a:hover{color:var(--burgundy);border-bottom-color:var(--burgundy);}
+  @media (max-width:620px){ .nav .links a{font-size:16px;padding:0 10px;} }
 
   /* ============ HERO ============ */
-  .hero{
-    position:relative; min-height:100svh; display:flex; align-items:center; justify-content:center;
-    text-align:center; overflow:hidden; color:#fff;
+  .hero{position:relative;background:var(--navy);}
+  .hero img.bg{width:100%;height:52vh;min-height:300px;max-height:620px;object-fit:cover;}
+  .hero .scrim{position:absolute;inset:0;background:rgba(22,32,58,.55);}
+  .hero .inner{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;color:#fff;padding:24px;
   }
-  .hero-media{position:absolute;inset:0;}
-  .hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:slowzoom 22s ease-in-out infinite alternate;}
-  @keyframes slowzoom{to{transform:scale(1.14);}}
-  .hero-media::after{
-    content:''; position:absolute; inset:0;
-    background:linear-gradient(180deg,rgba(20,26,40,.55) 0%,rgba(20,26,40,.32) 40%,rgba(20,26,40,.72) 100%);
-  }
-  .hero-inner{position:relative;z-index:2;padding:96px 20px 120px;width:min(900px,92vw);}
   .hero .greeting{
-    font-family:'Cormorant Garamond',serif; font-style:italic;
-    font-size:clamp(20px,3.6vw,32px); margin-bottom:20px; color:#fff;
-    text-shadow:0 2px 20px rgba(0,0,0,.4);
-    animation:fadeUp 1.2s cubic-bezier(.2,.8,.25,1) both;
+    font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;
+    color:#fff;margin-bottom:12px;
   }
-  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
-  .hero .kicker{font-size:clamp(10px,2.2vw,13px);letter-spacing:.52em;text-transform:uppercase;opacity:.9;}
-  .hero .names{
-    font-family:'Cormorant Garamond',serif; font-weight:500;
-    font-size:clamp(42px,10vw,104px); line-height:1.02; margin-top:18px;
-    text-shadow:0 2px 30px rgba(0,0,0,.35);
-  }
-  .hero .thanks{
-    font-family:'Cormorant Garamond',serif; font-style:italic;
-    font-size:clamp(18px,3.2vw,28px); margin-top:18px; opacity:.96;
-  }
-  .hero .meta{margin-top:26px;font-size:clamp(11px,2.2vw,13.5px);letter-spacing:.34em;text-transform:uppercase;opacity:.9;}
-  .hero .crest{display:flex;justify-content:center;gap:12px;margin-top:26px;}
-  .hero .crest svg{opacity:.95;}
-  .scrollcue{
-    position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;text-align:center;
-    font-size:10px;letter-spacing:.36em;text-transform:uppercase;opacity:.85;
-  }
-  .scrollcue .arrow{display:block;margin-top:8px;font-size:18px;animation:nudge 1.9s ease-in-out infinite;}
-  @keyframes nudge{50%{transform:translateY(7px);}}
+  @media (min-width:760px){ .hero .greeting{font-size:30px;} }
+  .hero .kicker{font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--beige-deep);}
+  .hero h1{font-size:38px;margin-top:10px;color:#fff;}
+  @media (min-width:760px){ .hero h1{font-size:68px;} }
+  .hero .meta{margin-top:14px;font-size:17px;font-weight:700;}
+  .hero .place{margin-top:4px;font-size:16px;color:rgba(255,255,255,.9);}
+  .hero-actions{background:var(--beige);padding:22px 0;}
+  .hero-actions .btn-row{margin-top:0;}
 
-  /* ============ QUICK CARDS ============ */
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:44px;}
+  /* ============ CARDS ============ */
+  .cards{display:grid;gap:16px;margin-top:32px;text-align:left;}
+  @media (min-width:700px){ .cards{grid-template-columns:repeat(2,1fr);} }
+  @media (min-width:1000px){ .cards{grid-template-columns:repeat(4,1fr);} }
   .card{
-    background:#fff;border:1px solid var(--line);border-radius:3px;padding:30px 26px;
-    text-align:left;transition:.3s ease;
+    background:var(--white);border:1px solid var(--grey-line);border-left:5px solid var(--burgundy);
+    border-radius:4px;padding:26px 24px;
   }
-  .card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(31,45,77,.09);border-color:rgba(191,159,79,.5);}
-  .card .num{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);line-height:1;}
-  .card h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:23px;margin-top:12px;color:var(--burgundy);}
-  .card p{margin-top:10px;font-weight:300;line-height:1.7;font-size:14.5px;color:var(--charcoal-soft);}
+  .card h3{font-size:24px;color:var(--navy);}
+  .card p{margin-top:10px;font-size:17px;color:var(--grey);line-height:1.7;}
   .card a.more{
-    display:inline-block;margin-top:16px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--burgundy);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px;
+    display:inline-flex;align-items:center;min-height:48px;margin-top:12px;
+    font-size:17px;font-weight:700;color:var(--burgundy);
   }
-
-  /* ============ GALLERY ============ */
-  .filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:34px;}
-  .chip{
-    padding:9px 20px;border:1px solid var(--line);background:#fff;border-radius:99px;
-    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--charcoal-soft);
-    cursor:pointer;transition:.24s ease;font-family:inherit;
-  }
-  .chip:hover{border-color:var(--gold);color:var(--burgundy);}
-  .chip.on{background:var(--burgundy);border-color:var(--burgundy);color:#fff;}
-
-  .grid{
-    margin-top:30px;
-    columns:4 240px; column-gap:12px;
-  }
-  @media (max-width:640px){ .grid{columns:2 140px;column-gap:8px;} }
-  .tile{
-    break-inside:avoid; margin-bottom:12px; position:relative; overflow:hidden;
-    border-radius:2px; background:var(--mist); cursor:zoom-in; display:block; width:100%;
-    border:0; padding:0; font:inherit;
-  }
-  @media (max-width:640px){ .tile{margin-bottom:8px;} }
-  .tile img{width:100%;height:auto;transition:transform .6s cubic-bezier(.2,.8,.25,1),opacity .5s ease;opacity:0;}
-  .tile img.loaded{opacity:1;}
-  .tile:hover img{transform:scale(1.05);}
-  .tile::after{
-    content:''; position:absolute; inset:0; background:linear-gradient(180deg,transparent 55%,rgba(31,45,77,.35));
-    opacity:0; transition:opacity .35s ease;
-  }
-  .tile:hover::after{opacity:1;}
-  .tile.video::before{
-    content:'▶'; position:absolute; z-index:2; left:50%; top:50%; transform:translate(-50%,-50%);
-    width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.9);color:var(--burgundy);
-    display:flex;align-items:center;justify-content:center;font-size:15px;padding-left:3px;
-  }
-  .gallery-status{
-    margin-top:26px;text-align:center;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--charcoal-soft);
-  }
-  .more-wrap{text-align:center;margin-top:34px;}
-  .count{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--charcoal-soft);margin-top:16px;}
 
   /* ============ PHOTO OF THE DAY ============ */
   .potd{
-    display:grid; grid-template-columns:1.15fr 1fr; gap:clamp(20px,3vw,40px);
-    align-items:center; text-align:left; margin-top:40px;
-    background:#fff; border:1px solid var(--line); border-radius:3px;
-    padding:clamp(18px,2.4vw,26px);
+    margin-top:32px;background:var(--white);border:1px solid var(--grey-line);
+    border-radius:4px;overflow:hidden;text-align:left;
   }
-  @media (max-width:760px){ .potd{grid-template-columns:1fr;} }
-  .potd .potd-img{
-    border:0;padding:0;background:var(--mist);cursor:zoom-in;overflow:hidden;border-radius:2px;
-    aspect-ratio:4/3;width:100%;
+  @media (min-width:820px){ .potd{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;} }
+  .potd .potd-img{border:0;padding:0;background:var(--beige-deep);cursor:zoom-in;width:100%;display:block;}
+  .potd .potd-img img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+  .potd figcaption{padding:26px 24px;}
+  .potd h3{font-size:26px;color:var(--navy);}
+  .potd p{margin-top:10px;font-size:17px;color:var(--grey);line-height:1.7;}
+  .potd .btn{margin-top:20px;}
+
+  /* ============ GALLERY ============ */
+  .filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:28px;}
+  .chip{
+    min-height:52px;padding:12px 22px;border:2px solid var(--grey-line);background:var(--white);
+    border-radius:4px;font-family:inherit;font-size:16px;font-weight:700;color:var(--navy);cursor:pointer;
   }
-  .potd .potd-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.25,1);}
-  .potd .potd-img:hover img{transform:scale(1.04);}
-  .potd h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(22px,3vw,30px);color:var(--burgundy);}
-  .potd p{margin-top:12px;font-size:14.5px;font-weight:300;line-height:1.8;color:var(--charcoal-soft);}
-  .potd .btn{margin-top:20px;padding:11px 22px;font-size:11px;}
+  .chip:hover{border-color:var(--burgundy);color:var(--burgundy);}
+  .chip.on{background:var(--burgundy);border-color:var(--burgundy);color:#fff;}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:28px;}
+  @media (min-width:700px){ .grid{grid-template-columns:repeat(3,1fr);gap:14px;} }
+  @media (min-width:1000px){ .grid{grid-template-columns:repeat(4,1fr);} }
+  .tile{
+    position:relative;display:block;width:100%;padding:0;border:0;border-radius:3px;
+    overflow:hidden;background:var(--beige-deep);cursor:zoom-in;aspect-ratio:1/1;
+  }
+  .tile img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;}
+  .tile img.loaded{opacity:1;}
+  .tile:hover{outline:3px solid var(--burgundy);outline-offset:-3px;}
+  .gallery-status{margin-top:24px;text-align:center;font-size:17px;color:var(--grey);}
+  .more-wrap{margin-top:28px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .more-wrap .btn{width:100%;}
+  @media (min-width:620px){ .more-wrap .btn{width:auto;min-width:280px;} }
+  .count{font-size:17px;color:var(--grey);}
+
+  /* ============ VIDEOS ============ */
+  .videos{display:grid;gap:22px;margin-top:32px;text-align:left;}
+  @media (min-width:820px){ .videos{grid-template-columns:repeat(2,1fr);} }
+  .vcard{background:var(--white);border:1px solid var(--grey-line);border-radius:4px;overflow:hidden;}
+  .vcard .frame{position:relative;aspect-ratio:16/9;background:#000;}
+  .vcard .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .vcard .body{padding:22px 24px;}
+  .vcard h3{font-size:24px;color:var(--navy);}
+  .vcard p{margin-top:8px;font-size:17px;color:var(--grey);line-height:1.7;}
+
+  /* ============ SHARE ============ */
+  .upload-box{
+    margin-top:32px;background:var(--white);border:2px solid var(--burgundy);
+    border-radius:4px;padding:28px 24px;text-align:center;
+  }
+  @media (min-width:760px){ .upload-box{padding:44px 40px;} }
+  .upload-box h3{font-size:28px;color:var(--navy);}
+  .upload-box p{margin-top:12px;font-size:18px;color:var(--grey);line-height:1.75;}
+  .steps{display:grid;gap:18px;margin-top:30px;text-align:left;}
+  @media (min-width:760px){ .steps{grid-template-columns:repeat(3,1fr);} }
+  .step{background:var(--beige);border-radius:4px;padding:20px 22px;}
+  .step b{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:var(--burgundy);}
+  .step span{display:block;margin-top:8px;font-size:17px;color:var(--grey);line-height:1.7;}
+
+  /* ============ FORMS ============ */
+  .formbox{margin-top:28px;background:var(--white);border:1px solid var(--grey-line);border-radius:4px;overflow:hidden;}
+  .formbox iframe{width:100%;height:900px;border:0;display:block;}
 
   /* ============ ANNIVERSARY ============ */
-  .anniv{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:42px;text-align:left;}
-  .anniv .panel{background:#fff;border:1px solid var(--line);border-radius:3px;padding:clamp(26px,3vw,36px);}
-  .anniv .panel h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:24px;color:var(--burgundy);}
-  .anniv .panel p{margin-top:12px;font-size:14.5px;font-weight:300;line-height:1.8;color:var(--charcoal-soft);}
+  .anniv{display:grid;gap:18px;margin-top:32px;text-align:left;}
+  @media (min-width:820px){ .anniv{grid-template-columns:repeat(2,1fr);} }
+  .anniv .panel{background:var(--white);border:1px solid var(--grey-line);border-radius:4px;padding:28px 24px;}
+  .anniv .panel h3{font-size:26px;color:var(--navy);}
+  .anniv .panel p{margin-top:12px;font-size:17px;color:var(--grey);line-height:1.75;}
   .anniv .panel .btn{margin-top:22px;}
-  .anniv iframe{width:100%;height:560px;border:0;display:block;margin-top:18px;}
-
-  /* ============ MODAL ============ */
-  .modal{position:fixed;inset:0;z-index:210;background:rgba(16,20,30,.72);display:none;align-items:center;justify-content:center;padding:20px;}
-  .modal.open{display:flex;}
-  .modal .sheet{
-    background:#fff;border-radius:4px;padding:clamp(28px,4vw,44px);width:min(560px,94vw);
-    max-height:88vh;overflow:auto;text-align:left;position:relative;
-  }
-  .modal h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3.4vw,32px);color:var(--burgundy);}
-  .modal p,.modal li{font-size:14.5px;font-weight:300;line-height:1.85;color:var(--charcoal-soft);margin-top:12px;}
-  .modal ol{margin-top:12px;padding-left:20px;}
-  .modal .x{position:absolute;top:14px;right:16px;border:0;background:none;font-size:26px;line-height:1;color:var(--charcoal-soft);cursor:pointer;}
-
-  /* ============ LIGHTBOX ============ */
-  .lb{
-    position:fixed;inset:0;z-index:200;background:rgba(16,20,30,.95);
-    display:none;align-items:center;justify-content:center;
-  }
-  .lb.open{display:flex;}
-  .lb img,.lb iframe{max-width:92vw;max-height:84vh;border-radius:2px;}
-  .lb iframe{width:min(92vw,1100px);aspect-ratio:16/9;height:auto;border:0;}
-  .lb .x,.lb .prev,.lb .next{
-    position:absolute;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);
-    color:#fff;cursor:pointer;border-radius:50%;width:48px;height:48px;font-size:20px;
-    display:flex;align-items:center;justify-content:center;transition:.24s ease;
-  }
-  .lb .x:hover,.lb .prev:hover,.lb .next:hover{background:rgba(255,255,255,.24);}
-  .lb .x{top:20px;right:20px;}
-  .lb .prev{left:16px;top:50%;transform:translateY(-50%);}
-  .lb .next{right:16px;top:50%;transform:translateY(-50%);}
-  .lb .cap{
-    position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.8);
-    font-size:11px;letter-spacing:.26em;text-transform:uppercase;text-align:center;width:90%;
-  }
-  .lb .cap a{color:var(--gold-soft);}
-
-  /* ============ VIDEO ============ */
-  .videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-top:40px;}
-  .vcard{background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
-  .vcard .frame{position:relative;aspect-ratio:16/9;background:#0e131f;}
-  .vcard .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
-  .vcard .body{padding:20px 22px 24px;}
-  .vcard h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;color:var(--burgundy);}
-  .vcard p{margin-top:8px;font-size:14px;font-weight:300;color:var(--charcoal-soft);line-height:1.7;}
-
-  /* ============ UPLOAD ============ */
-  .upload-box{
-    margin-top:40px;background:#fff;border:1px dashed rgba(191,159,79,.7);border-radius:4px;
-    padding:clamp(32px,5vw,56px);text-align:center;
-  }
-  .upload-box .icon{font-size:40px;color:var(--gold);line-height:1;}
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:34px;text-align:left;}
-  .step{border-left:2px solid var(--gold);padding-left:16px;}
-  .step b{display:block;font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--burgundy);font-weight:500;}
-  .step span{display:block;margin-top:6px;font-size:14px;font-weight:300;color:var(--charcoal-soft);line-height:1.7;}
+  /* inline text links get a full tap target of their own */
+  .anniv .panel p a{display:inline-flex;align-items:center;min-height:48px;font-weight:700;}
+  .anniv iframe{width:100%;height:620px;border:0;display:block;margin-top:16px;}
 
   /* ============ THRESHOLD ============ */
-  .threshold{
-    position:relative;color:#fff;overflow:hidden;
-    background:linear-gradient(160deg,#1f2d4d 0%,#2b1b28 60%,#5d2029 100%);
-  }
-  .threshold::before{
-    content:'';position:absolute;inset:0;opacity:.16;
-    background:radial-gradient(60% 60% at 20% 10%,rgba(191,159,79,.7),transparent 60%),
-               radial-gradient(50% 50% at 85% 80%,rgba(191,159,79,.5),transparent 60%);
-  }
-  .threshold .wrap{position:relative;z-index:2;}
-  .threshold .eyebrow{color:var(--gold-soft);}
-  .threshold h2.title{color:#fff;}
-  .threshold .lede{color:rgba(255,255,255,.82);}
-  .threshold .rule{background:var(--gold-soft);}
-  .t-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;margin-top:44px;}
-  .t-card{
-    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
-    border-radius:3px;padding:28px 24px;backdrop-filter:blur(4px);
-  }
-  .t-card h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:21px;color:var(--gold-soft);}
-  .t-card p{margin-top:10px;font-size:14px;font-weight:300;line-height:1.75;color:rgba(255,255,255,.8);}
-  .threshold .btn{background:var(--gold);border-color:var(--gold);}
-  .threshold .btn:hover{background:var(--gold-soft);border-color:var(--gold-soft);}
-  .threshold .btn.ghost{background:transparent;border-color:rgba(255,255,255,.5);color:#fff;}
-  .threshold .btn.ghost:hover{background:rgba(255,255,255,.14);}
+  .t-grid{display:grid;gap:16px;margin-top:34px;text-align:left;}
+  @media (min-width:700px){ .t-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (min-width:1000px){ .t-grid{grid-template-columns:repeat(4,1fr);} }
+  .t-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.28);border-radius:4px;padding:26px 24px;}
+  .t-card h3{font-size:24px;color:var(--beige);}
+  .t-card p{margin-top:10px;font-size:17px;line-height:1.75;color:rgba(255,255,255,.9);}
 
-  /* ============ GUESTBOOK / FORM ============ */
-  .formbox{margin-top:36px;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
-  .formbox iframe{width:100%;height:820px;border:0;display:block;}
+  /* ============ MODAL ============ */
+  .modal{position:fixed;inset:0;z-index:210;background:rgba(22,32,58,.8);display:none;align-items:center;justify-content:center;padding:16px;}
+  .modal.open{display:flex;}
+  .modal .sheet{
+    background:var(--white);border-radius:4px;padding:28px 24px;width:min(600px,100%);
+    max-height:90vh;overflow:auto;text-align:left;position:relative;
+  }
+  @media (min-width:760px){ .modal .sheet{padding:40px;} }
+  .modal h3{font-size:28px;color:var(--navy);padding-right:48px;}
+  .modal p{margin-top:14px;font-size:17px;color:var(--grey);line-height:1.75;}
+  .modal ol{margin-top:14px;padding-left:22px;}
+  .modal li{margin-top:12px;font-size:17px;color:var(--grey);line-height:1.75;}
+  .modal .x{
+    position:absolute;top:10px;right:10px;width:52px;height:52px;border:0;background:var(--beige);
+    border-radius:4px;font-size:26px;line-height:1;color:var(--navy);cursor:pointer;
+  }
+  .modal .x:hover{background:var(--beige-deep);}
+
+  /* ============ LIGHTBOX ============ */
+  .lb{position:fixed;inset:0;z-index:220;background:rgba(16,20,30,.97);display:none;flex-direction:column;}
+  .lb.open{display:flex;}
+  .lb .lb-top{display:flex;justify-content:flex-end;padding:10px;}
+  .lb .stage{flex:1;display:flex;align-items:center;justify-content:center;padding:0 8px;min-height:0;}
+  .lb .stage img{max-width:100%;max-height:100%;object-fit:contain;}
+  .lb .lb-bottom{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:12px 10px calc(12px + env(safe-area-inset-bottom));
+  }
+  .lb button{
+    min-height:56px;min-width:56px;padding:0 20px;border:2px solid rgba(255,255,255,.55);
+    background:transparent;color:#fff;font-family:inherit;font-size:17px;font-weight:700;
+    border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .lb button:hover{background:rgba(255,255,255,.16);}
+  .lb .cap{color:#fff;font-size:16px;text-align:center;flex:1;}
+  .lb .cap a{color:var(--beige);font-weight:700;}
 
   /* ============ FOOTER ============ */
-  .footer{background:#161d2e;color:rgba(255,255,255,.7);padding:60px 0 44px;text-align:center;}
-  .footer .names{font-family:'Cormorant Garamond',serif;font-size:28px;color:#fff;}
-  .footer .sub{margin-top:10px;font-size:11px;letter-spacing:.34em;text-transform:uppercase;}
-  .footer .flinks{margin-top:24px;display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
-  .footer .flinks a{font-size:11px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.75);}
-  .footer .flinks a:hover{color:var(--gold-soft);}
-  .footer .fine{margin-top:28px;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.4);}
+  .footer{background:var(--navy);color:#fff;padding:48px 0 40px;text-align:center;}
+  .footer .names{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:600;}
+  .footer .sub{margin-top:8px;font-size:16px;color:var(--beige-deep);}
+  .footer .flinks{margin-top:20px;display:flex;flex-wrap:wrap;gap:6px 4px;justify-content:center;}
+  .footer .flinks a{
+    display:flex;align-items:center;min-height:52px;padding:0 16px;
+    font-size:17px;font-weight:700;color:#fff;text-decoration:underline;text-underline-offset:4px;
+  }
+  .footer .flinks a:hover{color:var(--beige-deep);}
+  .footer .fine{margin-top:22px;font-size:16px;color:rgba(255,255,255,.75);}
 
-  /* setup notice shown only when placeholders are unfilled */
+  /* setup note — visible to the owner until a link is filled in */
   .setup{
-    display:none;margin-top:22px;padding:14px 18px;border:1px solid rgba(191,159,79,.55);
-    background:rgba(191,159,79,.1);border-radius:3px;font-size:13px;font-weight:300;
-    color:var(--charcoal-soft);line-height:1.7;
+    display:none;margin-top:20px;padding:16px 18px;border:2px solid var(--burgundy);
+    background:var(--beige);border-radius:4px;font-size:16px;color:var(--navy);
+    line-height:1.7;text-align:left;
   }
   .setup.show{display:block;}
+  .section.deep .setup{background:rgba(255,255,255,.1);border-color:var(--beige-deep);color:#fff;}
 </style>
 </head>
 <body>
 
 <!-- =========================================================
      CONFIG — edit the values in the SITE object near the
-     bottom of this file, in the SITE object) to plug in your
-     real links. Nothing else needs to change.
+     bottom of this file. Nothing else needs to change.
      ========================================================= -->
 
+<a class="skip" href="#main">Skip to the photos</a>
+
 <nav class="nav" id="nav">
-  <a class="mark" href="#top">X &amp; L</a>
-  <div class="links">
-    <a href="#photos">Photos</a>
-    <a href="#videos">Videos</a>
-    <a href="#share">Share Yours</a>
-    <a href="#guestbook" class="hide-sm">Guestbook</a>
-    <a href="#anniversary" class="hide-sm">Every Year</a>
-    <a href="threshold.html">Our Story</a>
+  <div class="bar">
+    <a class="mark" href="#top">Xerxes &amp; Loraine</a>
+    <div class="links">
+      <a href="#photos">Photos</a>
+      <a href="#videos">Videos</a>
+      <a href="#share">Add yours</a>
+      <a href="#anniversary">Keep in touch</a>
+      <a href="threshold.html">Our story</a>
+    </div>
   </div>
 </nav>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
-  <div class="hero-media">
-    <img id="heroImg" src="https://res.cloudinary.com/dymdk9ysp/image/upload/f_auto,q_auto,w_2000/v1779567339/preview_image_evwxst.jpg" alt="Xerxes and Loraine on their wedding day">
-  </div>
-  <div class="hero-inner">
+  <img class="bg" id="heroImg" src="https://res.cloudinary.com/dymdk9ysp/image/upload/f_auto,q_auto,w_1600/v1779567339/preview_image_evwxst.jpg" alt="Xerxes and Loraine on their wedding day">
+  <div class="scrim"></div>
+  <div class="inner">
     <div class="greeting" id="greeting" hidden></div>
-    <div class="kicker">Married &middot; 07 August 2026</div>
-    <div class="names">Xerxes <span style="font-style:italic;">&amp;</span> Loraine</div>
-    <div class="thanks">Thank you for standing with us.</div>
-    <div class="meta">Lazuri Hotel Resort &middot; Tagaytay, Philippines</div>
-    <div class="crest">
-      <svg width="150" height="30" viewBox="0 0 150 30" fill="none" aria-hidden="true">
-        <path d="M10 15h48M92 15h48" stroke="#bf9f4f" stroke-width="1"/>
-        <circle cx="69" cy="15" r="8" stroke="#bf9f4f" stroke-width="1.4" fill="none"/>
-        <circle cx="81" cy="15" r="8" stroke="#bf9f4f" stroke-width="1.4" fill="none"/>
-      </svg>
-    </div>
+    <div class="kicker">Married</div>
+    <h1>Xerxes &amp; Loraine</h1>
+    <div class="meta">7 August 2026</div>
+    <div class="place">Lazuri Hotel Resort &middot; Tagaytay</div>
+  </div>
+</header>
+<div class="hero-actions">
+  <div class="wrap">
     <div class="btn-row" style="justify-content:center;">
-      <a class="btn" href="#photos">View the Album</a>
-      <a class="btn ghost" href="#share" style="color:#fff;border-color:rgba(255,255,255,.6);">Share Your Photos</a>
+      <a class="btn" href="#photos">See the photos</a>
+      <a class="btn quiet" href="#share">Add your photos</a>
     </div>
   </div>
-  <div class="scrollcue">Scroll<span class="arrow">&#8595;</span></div>
-</header>
+</div>
 
-<!-- ============ INTRO / QUICK CARDS ============ -->
+<!-- ============ INTRO ============ -->
+<main id="main">
 <section class="section">
-  <div class="wrap center reveal-on-scroll">
-    <div class="eyebrow">A Letter</div>
+  <div class="wrap center reveal">
+    <div class="eyebrow">Thank you</div>
     <h2 class="title">The day is over.<br>The story isn't.</h2>
     <div class="rule"></div>
     <p class="lede">
-      From the first flight booked to the last dance on the grass — you made August 7 what it was.
-      Our photographer sent through <strong id="photoCountText">948</strong> photographs, the videographer
-      sent the films, and somewhere on your phone there are moments no professional could have caught.
-      This page is where all of it lives. Take what you love, add what you have, and stay a while at the end —
-      there's something we'd like to invite you into.
+      You made 7 August what it was. Our photographer sent us
+      <strong id="photoCountText">948</strong> photographs, the videographer sent the films, and
+      somewhere on your phone there are moments no professional could have caught.
     </p>
-    <div class="cards" style="text-align:left;">
+    <p class="lede">
+      Everything is on this page. Take what you love, add what you have &mdash; and at the end,
+      there is something we would like to invite you into.
+    </p>
+    <div class="cards">
       <div class="card">
-        <div class="num">01</div>
-        <h3>The Album</h3>
-        <p>Every frame from our photographer — browse the highlights here, or open the full gallery and download anything at full resolution.</p>
-        <a class="more" href="#photos">Browse photos &rarr;</a>
+        <h3>The photos</h3>
+        <p>Every picture from our photographer. Look through them here, or download any one of them.</p>
+        <a class="more" href="#photos">See the photos &rarr;</a>
       </div>
       <div class="card">
-        <div class="num">02</div>
-        <h3>The Films</h3>
-        <p>The highlight film, the ceremony, and the speeches — the ones you'll want to watch with the sound up.</p>
-        <a class="more" href="#videos">Watch videos &rarr;</a>
+        <h3>The videos</h3>
+        <p>The highlight film, the ceremony and the speeches. Best watched with the sound on.</p>
+        <a class="more" href="#videos">Watch the videos &rarr;</a>
       </div>
       <div class="card">
-        <div class="num">03</div>
-        <h3>Your Shots</h3>
-        <p>Drop the photos and clips you took straight into our shared folder. Blurry, candid, chaotic — especially those.</p>
-        <a class="more" href="#share">Upload yours &rarr;</a>
+        <h3>Your photos</h3>
+        <p>Add the pictures and clips you took that day. Blurry and candid ones especially.</p>
+        <a class="more" href="#share">Add your photos &rarr;</a>
       </div>
       <div class="card">
-        <div class="num">04</div>
-        <h3>What's Next</h3>
-        <p>Our life after the wedding has a mission attached to it. We'd love to tell you about Threshold over coffee.</p>
-        <a class="more" href="#threshold">Read the invitation &rarr;</a>
+        <h3>What comes next</h3>
+        <p>Our life after the wedding has a purpose attached to it. We would love to tell you about it.</p>
+        <a class="more" href="#threshold">Read our invitation &rarr;</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ PHOTOS ============ -->
-<section class="section alt" id="photos">
-  <div class="wrap center reveal-on-scroll">
-    <div class="eyebrow">The Album</div>
-    <h2 class="title">Photographs</h2>
+<section class="section beige" id="photos">
+  <div class="wrap center reveal">
+    <div class="eyebrow">The album</div>
+    <h2 class="title">Photos</h2>
     <div class="rule"></div>
     <p class="lede">
-      Start with the highlights. Tap <em>Load more</em> to keep going through the full set,
-      or open the Drive folder for every original file at print resolution.
+      Tap any picture to see it large. Use <strong>Show more photos</strong> to keep going,
+      or open the Drive folder to download the full-size files.
     </p>
 
     <!-- photo of the day -->
     <figure class="potd" id="potd" hidden>
-      <button class="potd-img" id="potdBtn" type="button" aria-label="Open today's photo">
+      <button class="potd-img" id="potdBtn" type="button" aria-label="Open today's photo, larger">
         <img id="potdImg" alt="Today's photo from the wedding" loading="lazy" decoding="async">
       </button>
       <figcaption>
-        <div class="eyebrow" style="margin-bottom:8px;">Photo of the day</div>
+        <div class="eyebrow">Photo of the day</div>
         <h3 id="potdDate"></h3>
-        <p>A different frame every day, drawn from the whole album. Come back tomorrow and it will have changed.</p>
-        <button class="btn ghost" id="potdShuffle" type="button">Show me another</button>
+        <p>A different picture every day, taken from the whole album. Come back tomorrow and it will have changed.</p>
+        <button class="btn quiet" id="potdShuffle" type="button">Show me another</button>
       </figcaption>
     </figure>
 
     <div class="filters" id="filters"></div>
     <div class="grid" id="grid"></div>
-    <div class="gallery-status" id="galleryStatus">Loading photographs…</div>
+    <div class="gallery-status" id="galleryStatus">Loading the photos&hellip;</div>
     <div class="more-wrap">
-      <button class="btn ghost" id="loadMore" hidden>Load more photos</button>
+      <button class="btn" id="loadMore" hidden>Show more photos</button>
       <div class="count" id="count"></div>
     </div>
 
     <div class="btn-row">
-      <a class="btn" id="driveAllBtn" href="#" target="_blank" rel="noopener">Open all photos in Drive</a>
-      <button class="btn gold" id="zipBtn" type="button">Download all as ZIP</button>
-      <a class="btn ghost" href="wedding-invitation.html">Revisit our invitation</a>
+      <a class="btn navy" id="driveAllBtn" href="#" target="_blank" rel="noopener">Open all photos in Drive</a>
+      <button class="btn quiet" id="zipBtn" type="button">Download them all</button>
+      <a class="btn quiet" href="wedding-invitation.html">See our invitation again</a>
     </div>
     <div class="setup" id="photosSetup"></div>
   </div>
@@ -470,45 +457,40 @@
 
 <!-- ============ VIDEOS ============ -->
 <section class="section" id="videos">
-  <div class="wrap center reveal-on-scroll">
-    <div class="eyebrow">The Films</div>
+  <div class="wrap center reveal">
+    <div class="eyebrow">The films</div>
     <h2 class="title">Videos</h2>
     <div class="rule"></div>
     <p class="lede">Sound on. These are best watched all the way through.</p>
-    <div class="videos" id="videoGrid" style="text-align:left;"></div>
+    <div class="videos" id="videoGrid"></div>
     <div class="btn-row">
-      <a class="btn ghost" id="driveVideoBtn" href="#" target="_blank" rel="noopener">All video files in Drive</a>
+      <a class="btn navy" id="driveVideoBtn" href="#" target="_blank" rel="noopener">All the video files in Drive</a>
     </div>
     <div class="setup" id="videosSetup"></div>
   </div>
 </section>
 
 <!-- ============ SHARE YOURS ============ -->
-<section class="section alt" id="share">
-  <div class="wrap center reveal-on-scroll">
-    <div class="eyebrow">Your Turn</div>
+<section class="section beige" id="share">
+  <div class="wrap center reveal">
+    <div class="eyebrow">Your turn</div>
     <h2 class="title">Add the photos you took</h2>
     <div class="rule"></div>
     <p class="lede">
-      The professionals caught the vows. You caught everything else — the table you were on,
-      the moment before the entrance, the dance floor at 11pm. Please add them; we want all of it.
+      The photographer caught the vows. You caught everything else &mdash; your table,
+      the moment before the entrance, the dancing at the end of the night. Please send them to us.
     </p>
 
     <div class="upload-box">
-      <div class="icon">&#8593;</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(22px,3.4vw,30px);color:var(--burgundy);margin-top:14px;">
-        Drop them into our shared folder
-      </h3>
-      <p class="lede" style="margin-left:auto;margin-right:auto;">
-        Photos and videos both welcome. Nothing gets deleted, nothing gets judged.
-      </p>
+      <h3>Put them in our shared folder</h3>
+      <p>Photos and videos are both welcome. There is no limit, and nothing is too small.</p>
       <div class="btn-row" style="justify-content:center;">
-        <a class="btn gold" id="uploadBtn" href="#" target="_blank" rel="noopener">Upload your photos &amp; videos</a>
+        <a class="btn" id="uploadBtn" href="#" target="_blank" rel="noopener">Add your photos and videos</a>
       </div>
       <div class="steps">
-        <div class="step"><b>1. Tap upload</b><span>The Drive folder opens in a new tab — no account setup needed on your side.</span></div>
-        <div class="step"><b>2. Drag your files in</b><span>Or use the <em>New &rarr; File upload</em> button. Whole camera rolls are fine.</span></div>
-        <div class="step"><b>3. Name your batch</b><span>If you can, put your name in the filename or make a folder — it helps us thank you properly.</span></div>
+        <div class="step"><b>1. Tap the button</b><span>The folder opens in a new tab. You do not need to sign up for anything.</span></div>
+        <div class="step"><b>2. Choose your files</b><span>Use the <strong>New</strong> button, then <strong>File upload</strong>. You can pick many at once.</span></div>
+        <div class="step"><b>3. Tell us who you are</b><span>If you can, put your name in the file name. It helps us thank you properly.</span></div>
       </div>
       <div class="setup" id="uploadSetup"></div>
     </div>
@@ -517,36 +499,36 @@
 
 <!-- ============ GUESTBOOK ============ -->
 <section class="section" id="guestbook">
-  <div class="wrap center reveal-on-scroll">
-    <div class="eyebrow">Leave a Note</div>
+  <div class="wrap center reveal">
+    <div class="eyebrow">Leave a note</div>
     <h2 class="title">The guestbook we forgot to pass around</h2>
     <div class="rule"></div>
     <p class="lede">
-      A blessing, a memory, an inside joke, marriage advice you swear by. We'll read every one,
-      and we're printing them into the album.
+      A blessing, a memory, a joke, or advice on marriage that you swear by.
+      We will read every one, and we are printing them into the album.
     </p>
     <div class="formbox" id="guestbookBox" hidden>
-      <iframe id="guestbookFrame" title="Guestbook form" loading="lazy" src="about:blank">Loading…</iframe>
+      <iframe id="guestbookFrame" title="Guestbook form" loading="lazy" src="about:blank">Loading&hellip;</iframe>
     </div>
     <div class="setup" id="guestbookSetup"></div>
   </div>
 </section>
 
 <!-- ============ ANNIVERSARY ============ -->
-<section class="section alt" id="anniversary">
-  <div class="wrap center reveal-on-scroll">
+<section class="section beige" id="anniversary">
+  <div class="wrap center reveal">
     <div class="eyebrow">Every August</div>
     <h2 class="title">One photo a year, on the day</h2>
     <div class="rule"></div>
     <p class="lede">
-      Every 7th of August we send one photograph from the album and a short note about the year we've had.
-      Once a year, nothing else, unsubscribe whenever. It's the cheapest way we know to stay in each other's lives.
+      Every 7th of August we will send one photograph from the album and a short note about our year.
+      Once a year, nothing else, and you can stop it at any time.
     </p>
 
     <div class="anniv">
       <div class="panel">
         <h3>Get the yearly letter</h3>
-        <p>Your name and email, and that's it. We'll never pass it on to anyone.</p>
+        <p>Just your name and email address. We will never pass it on to anyone.</p>
         <div id="annivFormBox" hidden><iframe id="annivFrame" title="Anniversary letter signup" loading="lazy" src="about:blank"></iframe></div>
         <a class="btn" id="annivBtn" href="#" target="_blank" rel="noopener" hidden>Sign me up</a>
         <div class="setup" id="annivSetup"></div>
@@ -554,108 +536,109 @@
       <div class="panel">
         <h3>Put it in your calendar</h3>
         <p>
-          Adds <em>Xerxes &amp; Loraine's anniversary</em> to your calendar as a yearly all-day reminder on
-          7 August, with a link back to this album. Works with Google Calendar, Apple Calendar and Outlook.
+          This adds our anniversary to your calendar every 7 August, with a link back to these photos.
+          It works with Google Calendar, Apple Calendar and Outlook.
         </p>
-        <button class="btn ghost" id="icsBtn" type="button">Add the anniversary (.ics)</button>
-        <p style="margin-top:16px;font-size:13px;">
-          Or <a href="#" id="gcalLink" target="_blank" rel="noopener" style="color:var(--burgundy);">add it straight to Google Calendar</a>.
-        </p>
+        <button class="btn quiet" id="icsBtn" type="button">Add it to my calendar</button>
+        <p>Or <a href="#" id="gcalLink" target="_blank" rel="noopener">add it straight to Google Calendar</a>.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ THRESHOLD ============ -->
-<section class="section threshold" id="threshold">
-  <div class="wrap reveal-on-scroll">
+<section class="section deep" id="threshold">
+  <div class="wrap reveal">
     <div class="center">
-      <div class="eyebrow">One Last Thing</div>
+      <div class="eyebrow">One last thing</div>
       <h2 class="title">Come with us past the threshold</h2>
       <div class="rule"></div>
       <p class="lede">
-        A wedding gathers people for a day. What we're building asks for something longer.
-        <strong style="color:#fff;font-weight:400;">Threshold</strong> is the ministry work we're giving our
-        married life to here in Dubai — and the room isn't full yet. We're not asking you to decide anything
-        on a webpage. We're asking for a coffee, a juice, or forty minutes on a video call.
+        A wedding gathers people for a day. What we are building asks for something longer.
+        <strong>Threshold</strong> is the ministry work we are giving our married life to here in Dubai,
+        and there is room for more of us.
+      </p>
+      <p class="lede">
+        We are not asking you to decide anything on a website. We are asking for a coffee,
+        a juice, or forty minutes on a video call.
       </p>
     </div>
 
     <div class="t-grid">
       <div class="t-card">
         <h3>Pray with us</h3>
-        <p>The lightest and, honestly, the most valuable partnership. You get our monthly letter — the real one, wins and setbacks both.</p>
+        <p>The simplest way in, and honestly the most valuable. You get our monthly letter, the real one.</p>
       </div>
       <div class="t-card">
         <h3>Give with us</h3>
-        <p>Monthly or one-time. Every dirham goes into the work itself, and you'll always see where it went.</p>
+        <p>Monthly or one time. It goes into the work itself, and you will always see where it went.</p>
       </div>
       <div class="t-card">
         <h3>Come alongside</h3>
-        <p>Skills, hospitality, a network, a spare evening. Some of the best partnership has never involved money.</p>
+        <p>Skills, hospitality, a network, a spare evening. The best help has often involved no money at all.</p>
       </div>
       <div class="t-card">
         <h3>Just hear us out</h3>
-        <p>No commitment, no pitch deck. Sit down with us, ask hard questions, and decide nothing that day.</p>
+        <p>No commitment and no sales pitch. Sit with us, ask hard questions, and decide nothing that day.</p>
       </div>
     </div>
 
     <div class="center">
       <div class="btn-row">
-        <a class="btn" href="threshold.html">Read our story</a>
-        <a class="btn ghost" id="meetingBtn" href="#" target="_blank" rel="noopener">Book a coffee or a call</a>
-        <a class="btn ghost" id="thresholdBtn" href="https://threshold-dubai.vercel.app/" target="_blank" rel="noopener">See what Threshold is</a>
+        <a class="btn on-dark" href="threshold.html">Read our story</a>
+        <a class="btn on-dark" id="meetingBtn" href="#" target="_blank" rel="noopener">Book a coffee or a call</a>
+        <a class="btn on-dark" id="thresholdBtn" href="https://threshold-dubai.vercel.app/" target="_blank" rel="noopener">See what Threshold is</a>
       </div>
-      <div class="setup" id="meetingSetup" style="color:rgba(255,255,255,.85);border-color:rgba(191,159,79,.6);background:rgba(191,159,79,.14);"></div>
-      <p class="lede" style="margin-top:28px;font-size:14px;">
-        In Dubai? The coffee is on us. Anywhere else in the world? We'll find a time zone that works.
-      </p>
+      <div class="setup" id="meetingSetup"></div>
+      <p class="lede">In Dubai? The coffee is on us. Anywhere else? We will find a time that works.</p>
     </div>
   </div>
 </section>
+</main>
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
   <div class="wrap">
     <div class="names">Xerxes &amp; Loraine</div>
-    <div class="sub">07 . 08 . 2026 &middot; Tagaytay</div>
+    <div class="sub">7 August 2026 &middot; Tagaytay</div>
     <div class="flinks">
       <a href="#photos">Photos</a>
       <a href="#videos">Videos</a>
-      <a href="#share">Share Yours</a>
+      <a href="#share">Add yours</a>
       <a href="#guestbook">Guestbook</a>
-      <a href="#anniversary">Every Year</a>
-      <a href="threshold.html">Our Story</a>
-      <a href="#threshold">Threshold</a>
-      <a href="wedding-invitation.html">Our Invitation</a>
+      <a href="#anniversary">Keep in touch</a>
+      <a href="threshold.html">Our story</a>
+      <a href="wedding-invitation.html">Our invitation</a>
     </div>
-    <div class="fine">Made with gratitude &middot; Photography by our wedding team</div>
+    <div class="fine">Made with gratitude</div>
   </div>
 </footer>
 
-<!-- ============ ZIP MODAL ============ -->
+<!-- ============ DOWNLOAD MODAL ============ -->
 <div class="modal" id="zipModal" role="dialog" aria-modal="true" aria-labelledby="zipTitle">
   <div class="sheet">
-    <button class="x" id="zipClose" aria-label="Close">&times;</button>
-    <h3 id="zipTitle">Download the whole album</h3>
-    <p>All <span id="zipCount">948</span> photographs, at full resolution. It's a large download — use Wi-Fi if you can.</p>
+    <button class="x" id="zipClose" aria-label="Close this box">&times;</button>
+    <h3 id="zipTitle">Download all the photos</h3>
+    <p>All <span id="zipCount">948</span> pictures at full size. It is a big download, so use wi-fi if you can.</p>
     <ol>
-      <li>Tap the button below to open the Drive folder.</li>
-      <li>Press <strong>Ctrl</strong> (or <strong>&#8984;</strong> on a Mac) <strong>+ A</strong> to select everything.</li>
-      <li>Right-click and choose <strong>Download</strong> — Drive zips it for you and emails a link if it's big.</li>
+      <li>Tap the button below. The folder opens in a new tab.</li>
+      <li>On a computer, press <strong>Ctrl</strong> and <strong>A</strong> together (on a Mac, <strong>&#8984;</strong> and <strong>A</strong>) to select everything, then right-click and choose <strong>Download</strong>.</li>
+      <li>On a phone, open the folder in the Google Drive app and use the <strong>&hellip;</strong> menu.</li>
     </ol>
-    <p style="font-size:13px;">On a phone, the Google Drive app can download a folder from its &hellip; menu.</p>
-    <div class="btn-row" style="margin-top:24px;"><a class="btn" id="zipDriveBtn" href="#" target="_blank" rel="noopener">Open the Drive folder</a></div>
+    <p>Google will put them into one zip file for you. If it is very large, it will email you the link instead.</p>
+    <div class="btn-row"><a class="btn" id="zipDriveBtn" href="#" target="_blank" rel="noopener">Open the Drive folder</a></div>
   </div>
 </div>
 
 <!-- ============ LIGHTBOX ============ -->
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
-  <button class="x" id="lbClose" aria-label="Close">&times;</button>
-  <button class="prev" id="lbPrev" aria-label="Previous">&#8249;</button>
-  <button class="next" id="lbNext" aria-label="Next">&#8250;</button>
-  <div id="lbStage"></div>
-  <div class="cap" id="lbCap"></div>
+  <div class="lb-top"><button id="lbClose">&times;&nbsp; Close</button></div>
+  <div class="stage" id="lbStage"></div>
+  <div class="lb-bottom">
+    <button id="lbPrev" aria-label="Previous photo">&#8249;&nbsp; Back</button>
+    <div class="cap" id="lbCap"></div>
+    <button id="lbNext" aria-label="Next photo">Next &nbsp;&#8250;</button>
+  </div>
 </div>
 
 <script>
@@ -765,6 +748,8 @@ function cld(publicId, w, extra){
   return `https://res.cloudinary.com/${SITE.cloudName}/image/upload/${t}/${publicId}`;
 }
 
+document.documentElement.classList.add("js");
+
 /* ============================ nav ======================================= */
 const nav = $("#nav");
 const onScroll = () => nav.classList.toggle("solid", window.scrollY > 60);
@@ -774,7 +759,7 @@ onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
 const io = new IntersectionObserver(es=>{
   es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
 },{threshold:.12});
-$$(".reveal-on-scroll").forEach(el=>io.observe(el));
+$$(".reveal").forEach(el=>io.observe(el));
 
 /* ============================ buttons =================================== */
 wire("#driveAllBtn",   SITE.driveAllPhotos, "#photosSetup",
@@ -820,7 +805,7 @@ $("#zipCount").textContent = SITE.totalPhotos.toLocaleString();
   const btn = $("#zipBtn"), modal = $("#zipModal");
   if(isSet(SITE.zipUrl)){                      // one prepared file → direct download
     const a = document.createElement("a");
-    a.className = "btn gold"; a.href = SITE.zipUrl; a.textContent = "Download all as ZIP";
+    a.className = "btn quiet"; a.href = SITE.zipUrl; a.textContent = "Download all as ZIP";
     a.setAttribute("download",""); a.rel = "noopener";
     btn.replaceWith(a);
     return;
