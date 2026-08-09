@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Xerxes &amp; Loraine &middot; The Wedding Album</title>
 <meta name="description" content="Photos and videos from the wedding of Xerxes & Loraine — August 7, 2026, Lazuri Hotel Resort, Tagaytay. Relive the day, share the shots you took, and journey with us into what comes next.">
+<!-- Unlisted: no password, but kept out of search results. -->
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noimageindex">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Xerxes &amp; Loraine · The Wedding Album">
 <meta property="og:description" content="Relive August 7, 2026 — photos, videos, and the shots you took. Thank you for being there.">
@@ -123,6 +126,13 @@
     background:linear-gradient(180deg,rgba(20,26,40,.55) 0%,rgba(20,26,40,.32) 40%,rgba(20,26,40,.72) 100%);
   }
   .hero-inner{position:relative;z-index:2;padding:96px 20px 120px;width:min(900px,92vw);}
+  .hero .greeting{
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:clamp(20px,3.6vw,32px); margin-bottom:20px; color:#fff;
+    text-shadow:0 2px 20px rgba(0,0,0,.4);
+    animation:fadeUp 1.2s cubic-bezier(.2,.8,.25,1) both;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
   .hero .kicker{font-size:clamp(10px,2.2vw,13px);letter-spacing:.52em;text-transform:uppercase;opacity:.9;}
   .hero .names{
     font-family:'Cormorant Garamond',serif; font-weight:500;
@@ -198,6 +208,44 @@
   }
   .more-wrap{text-align:center;margin-top:34px;}
   .count{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--charcoal-soft);margin-top:16px;}
+
+  /* ============ PHOTO OF THE DAY ============ */
+  .potd{
+    display:grid; grid-template-columns:1.15fr 1fr; gap:clamp(20px,3vw,40px);
+    align-items:center; text-align:left; margin-top:40px;
+    background:#fff; border:1px solid var(--line); border-radius:3px;
+    padding:clamp(18px,2.4vw,26px);
+  }
+  @media (max-width:760px){ .potd{grid-template-columns:1fr;} }
+  .potd .potd-img{
+    border:0;padding:0;background:var(--mist);cursor:zoom-in;overflow:hidden;border-radius:2px;
+    aspect-ratio:4/3;width:100%;
+  }
+  .potd .potd-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.25,1);}
+  .potd .potd-img:hover img{transform:scale(1.04);}
+  .potd h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(22px,3vw,30px);color:var(--burgundy);}
+  .potd p{margin-top:12px;font-size:14.5px;font-weight:300;line-height:1.8;color:var(--charcoal-soft);}
+  .potd .btn{margin-top:20px;padding:11px 22px;font-size:11px;}
+
+  /* ============ ANNIVERSARY ============ */
+  .anniv{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:42px;text-align:left;}
+  .anniv .panel{background:#fff;border:1px solid var(--line);border-radius:3px;padding:clamp(26px,3vw,36px);}
+  .anniv .panel h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:24px;color:var(--burgundy);}
+  .anniv .panel p{margin-top:12px;font-size:14.5px;font-weight:300;line-height:1.8;color:var(--charcoal-soft);}
+  .anniv .panel .btn{margin-top:22px;}
+  .anniv iframe{width:100%;height:560px;border:0;display:block;margin-top:18px;}
+
+  /* ============ MODAL ============ */
+  .modal{position:fixed;inset:0;z-index:210;background:rgba(16,20,30,.72);display:none;align-items:center;justify-content:center;padding:20px;}
+  .modal.open{display:flex;}
+  .modal .sheet{
+    background:#fff;border-radius:4px;padding:clamp(28px,4vw,44px);width:min(560px,94vw);
+    max-height:88vh;overflow:auto;text-align:left;position:relative;
+  }
+  .modal h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3.4vw,32px);color:var(--burgundy);}
+  .modal p,.modal li{font-size:14.5px;font-weight:300;line-height:1.85;color:var(--charcoal-soft);margin-top:12px;}
+  .modal ol{margin-top:12px;padding-left:20px;}
+  .modal .x{position:absolute;top:14px;right:16px;border:0;background:none;font-size:26px;line-height:1;color:var(--charcoal-soft);cursor:pointer;}
 
   /* ============ LIGHTBOX ============ */
   .lb{
@@ -306,7 +354,8 @@
     <a href="#videos">Videos</a>
     <a href="#share">Share Yours</a>
     <a href="#guestbook" class="hide-sm">Guestbook</a>
-    <a href="#threshold">Threshold</a>
+    <a href="#anniversary" class="hide-sm">Every Year</a>
+    <a href="threshold.html">Our Story</a>
   </div>
 </nav>
 
@@ -316,6 +365,7 @@
     <img id="heroImg" src="https://res.cloudinary.com/dymdk9ysp/image/upload/f_auto,q_auto,w_2000/v1779567339/preview_image_evwxst.jpg" alt="Xerxes and Loraine on their wedding day">
   </div>
   <div class="hero-inner">
+    <div class="greeting" id="greeting" hidden></div>
     <div class="kicker">Married &middot; 07 August 2026</div>
     <div class="names">Xerxes <span style="font-style:italic;">&amp;</span> Loraine</div>
     <div class="thanks">Thank you for standing with us.</div>
@@ -388,6 +438,19 @@
       or open the Drive folder for every original file at print resolution.
     </p>
 
+    <!-- photo of the day -->
+    <figure class="potd" id="potd" hidden>
+      <button class="potd-img" id="potdBtn" type="button" aria-label="Open today's photo">
+        <img id="potdImg" alt="Today's photo from the wedding" loading="lazy" decoding="async">
+      </button>
+      <figcaption>
+        <div class="eyebrow" style="margin-bottom:8px;">Photo of the day</div>
+        <h3 id="potdDate"></h3>
+        <p>A different frame every day, drawn from the whole album. Come back tomorrow and it will have changed.</p>
+        <button class="btn ghost" id="potdShuffle" type="button">Show me another</button>
+      </figcaption>
+    </figure>
+
     <div class="filters" id="filters"></div>
     <div class="grid" id="grid"></div>
     <div class="gallery-status" id="galleryStatus">Loading photographs…</div>
@@ -398,6 +461,7 @@
 
     <div class="btn-row">
       <a class="btn" id="driveAllBtn" href="#" target="_blank" rel="noopener">Open all photos in Drive</a>
+      <button class="btn gold" id="zipBtn" type="button">Download all as ZIP</button>
       <a class="btn ghost" href="wedding-invitation.html">Revisit our invitation</a>
     </div>
     <div class="setup" id="photosSetup"></div>
@@ -468,6 +532,40 @@
   </div>
 </section>
 
+<!-- ============ ANNIVERSARY ============ -->
+<section class="section alt" id="anniversary">
+  <div class="wrap center reveal-on-scroll">
+    <div class="eyebrow">Every August</div>
+    <h2 class="title">One photo a year, on the day</h2>
+    <div class="rule"></div>
+    <p class="lede">
+      Every 7th of August we send one photograph from the album and a short note about the year we've had.
+      Once a year, nothing else, unsubscribe whenever. It's the cheapest way we know to stay in each other's lives.
+    </p>
+
+    <div class="anniv">
+      <div class="panel">
+        <h3>Get the yearly letter</h3>
+        <p>Your name and email, and that's it. We'll never pass it on to anyone.</p>
+        <div id="annivFormBox" hidden><iframe id="annivFrame" title="Anniversary letter signup" loading="lazy" src="about:blank"></iframe></div>
+        <a class="btn" id="annivBtn" href="#" target="_blank" rel="noopener" hidden>Sign me up</a>
+        <div class="setup" id="annivSetup"></div>
+      </div>
+      <div class="panel">
+        <h3>Put it in your calendar</h3>
+        <p>
+          Adds <em>Xerxes &amp; Loraine's anniversary</em> to your calendar as a yearly all-day reminder on
+          7 August, with a link back to this album. Works with Google Calendar, Apple Calendar and Outlook.
+        </p>
+        <button class="btn ghost" id="icsBtn" type="button">Add the anniversary (.ics)</button>
+        <p style="margin-top:16px;font-size:13px;">
+          Or <a href="#" id="gcalLink" target="_blank" rel="noopener" style="color:var(--burgundy);">add it straight to Google Calendar</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ THRESHOLD ============ -->
 <section class="section threshold" id="threshold">
   <div class="wrap reveal-on-scroll">
@@ -504,7 +602,8 @@
 
     <div class="center">
       <div class="btn-row">
-        <a class="btn" id="meetingBtn" href="#" target="_blank" rel="noopener">Book a coffee or a call</a>
+        <a class="btn" href="threshold.html">Read our story</a>
+        <a class="btn ghost" id="meetingBtn" href="#" target="_blank" rel="noopener">Book a coffee or a call</a>
         <a class="btn ghost" id="thresholdBtn" href="https://threshold-dubai.vercel.app/" target="_blank" rel="noopener">See what Threshold is</a>
       </div>
       <div class="setup" id="meetingSetup" style="color:rgba(255,255,255,.85);border-color:rgba(191,159,79,.6);background:rgba(191,159,79,.14);"></div>
@@ -525,12 +624,30 @@
       <a href="#videos">Videos</a>
       <a href="#share">Share Yours</a>
       <a href="#guestbook">Guestbook</a>
+      <a href="#anniversary">Every Year</a>
+      <a href="threshold.html">Our Story</a>
       <a href="#threshold">Threshold</a>
       <a href="wedding-invitation.html">Our Invitation</a>
     </div>
     <div class="fine">Made with gratitude &middot; Photography by our wedding team</div>
   </div>
 </footer>
+
+<!-- ============ ZIP MODAL ============ -->
+<div class="modal" id="zipModal" role="dialog" aria-modal="true" aria-labelledby="zipTitle">
+  <div class="sheet">
+    <button class="x" id="zipClose" aria-label="Close">&times;</button>
+    <h3 id="zipTitle">Download the whole album</h3>
+    <p>All <span id="zipCount">948</span> photographs, at full resolution. It's a large download — use Wi-Fi if you can.</p>
+    <ol>
+      <li>Tap the button below to open the Drive folder.</li>
+      <li>Press <strong>Ctrl</strong> (or <strong>&#8984;</strong> on a Mac) <strong>+ A</strong> to select everything.</li>
+      <li>Right-click and choose <strong>Download</strong> — Drive zips it for you and emails a link if it's big.</li>
+    </ol>
+    <p style="font-size:13px;">On a phone, the Google Drive app can download a folder from its &hellip; menu.</p>
+    <div class="btn-row" style="margin-top:24px;"><a class="btn" id="zipDriveBtn" href="#" target="_blank" rel="noopener">Open the Drive folder</a></div>
+  </div>
+</div>
 
 <!-- ============ LIGHTBOX ============ -->
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
@@ -566,6 +683,20 @@ const SITE = {
   // A Google Form embed URL, ending in /viewform?embedded=true
   guestbookForm  : "PASTE_GUESTBOOK_GOOGLE_FORM_EMBED_URL",
 
+  /* ---- Yearly anniversary letter -------------------------------------
+     Either embed a Google Form (name + email) with `annivForm`, or just
+     link out to one / a newsletter signup with `annivLink`. Use one.   */
+  annivForm      : "PASTE_ANNIVERSARY_GOOGLE_FORM_EMBED_URL",
+  annivLink      : "PASTE_ANNIVERSARY_SIGNUP_LINK",
+
+  /* ---- Download all as ZIP -------------------------------------------
+     Leave as-is to show guests how to bulk-download from Drive (Drive
+     zips a whole folder for them — no setup needed on your side).
+     If you'd rather serve one prepared file, put its direct link here:
+     a Cloudinary archive URL, a Dropbox link, or a .zip you uploaded to
+     Drive. It then becomes a one-tap download.                        */
+  zipUrl         : "PASTE_DIRECT_ZIP_DOWNLOAD_LINK",
+
   /* ---- Videos ---------------------------------------------------------
      Add as many as you like. `embed` accepts a YouTube/Vimeo embed URL,
      or a Google Drive preview URL:
@@ -600,7 +731,10 @@ const SITE = {
     // "https://example.com/any-other-image.jpg"
   ],
   batchSize    : 60,                  // photos rendered per "Load more" tap
-  totalPhotos  : 948
+  totalPhotos  : 948,
+
+  /* ---- The day itself (used by the calendar reminder) ---------------- */
+  weddingDate  : { y:2026, m:8, d:7 }  // 7 August 2026
 };
 
 /* ============================ helpers =================================== */
@@ -653,6 +787,108 @@ wire("#meetingBtn",    SITE.meetingUrl,     "#meetingSetup",
      "paste your Calendly (or other booking) link into SITE.meetingUrl.");
 $("#thresholdBtn").href = SITE.thresholdUrl;
 $("#photoCountText").textContent = SITE.totalPhotos.toLocaleString();
+$("#zipCount").textContent = SITE.totalPhotos.toLocaleString();
+
+/* ================= personalised greeting ================================
+   Send each guest a link like  ?to=Maria  or  ?to=Tita%20Cora  and the page
+   opens with their name on it. Multiple names work too: ?to=Ben%20%26%20Ana
+   No name in the link → the page just reads normally for everyone else.
+   ====================================================================== */
+(function greet(){
+  const raw = new URLSearchParams(location.search).get("to")
+           || new URLSearchParams(location.search).get("name");
+  if(!raw) return;
+  // Keep letters, spaces, & - ' . only — never inject markup from a URL.
+  const clean = raw.replace(/[^\p{L}\p{M}\s&''.-]/gu, "").trim().replace(/\s+/g," ").slice(0,48);
+  if(!clean) return;
+  const pretty = clean.replace(/\p{L}[\p{L}\p{M}''-]*/gu,
+    w => w.length > 2 ? w[0].toUpperCase() + w.slice(1) : w);
+  const el = $("#greeting");
+  el.textContent = "Thank you for being there, " + pretty + ".";
+  el.hidden = false;
+  document.title = pretty + " — thank you · Xerxes & Loraine";
+
+  // keep the name attached when they move to the story page
+  $$('a[href^="threshold.html"], a[href^="wedding-invitation.html"]').forEach(a => {
+    const [path, hash=""] = a.getAttribute("href").split("#");
+    a.setAttribute("href", path + "?to=" + encodeURIComponent(clean) + (hash ? "#"+hash : ""));
+  });
+})();
+
+/* ================= download all as ZIP ================================= */
+(function zip(){
+  const btn = $("#zipBtn"), modal = $("#zipModal");
+  if(isSet(SITE.zipUrl)){                      // one prepared file → direct download
+    const a = document.createElement("a");
+    a.className = "btn gold"; a.href = SITE.zipUrl; a.textContent = "Download all as ZIP";
+    a.setAttribute("download",""); a.rel = "noopener";
+    btn.replaceWith(a);
+    return;
+  }
+  if(!isSet(SITE.driveAllPhotos)){ btn.hidden = true; return; }
+  $("#zipDriveBtn").href = SITE.driveAllPhotos;
+  const close = () => { modal.classList.remove("open"); document.body.style.overflow = ""; };
+  btn.addEventListener("click", () => { modal.classList.add("open"); document.body.style.overflow = "hidden"; });
+  $("#zipClose").addEventListener("click", close);
+  modal.addEventListener("click", e => { if(e.target === modal) close(); });
+  document.addEventListener("keydown", e => { if(e.key === "Escape") close(); });
+})();
+
+/* ================= anniversary signup ================================== */
+(function anniversary(){
+  if(isSet(SITE.annivForm)){
+    $("#annivFrame").src = SITE.annivForm;
+    $("#annivFormBox").hidden = false;
+  }else if(isSet(SITE.annivLink)){
+    const b = $("#annivBtn"); b.href = SITE.annivLink; b.hidden = false;
+  }else{
+    note($("#annivSetup"),
+      "make a Google Form (Name + Email) and paste its embed URL into SITE.annivForm, " +
+      "or any signup link into SITE.annivLink.");
+  }
+})();
+
+/* ================= anniversary calendar reminder ======================= */
+(function calendar(){
+  const {y,m,d} = SITE.weddingDate;
+  const pad  = n => String(n).padStart(2,"0");
+  const day  = `${y}${pad(m)}${pad(d)}`;
+  const next = `${y}${pad(m)}${pad(d+1)}`;          // all-day events end the next day
+  const title = "Xerxes & Loraine's Anniversary";
+  const url   = location.origin + location.pathname;
+  const desc  = "Married 7 August 2026 in Tagaytay. Revisit the album: " + url;
+
+  $("#gcalLink").href =
+    "https://calendar.google.com/calendar/render?action=TEMPLATE"
+    + "&text="    + encodeURIComponent(title)
+    + "&dates="   + day + "/" + next
+    + "&recur="   + encodeURIComponent("RRULE:FREQ=YEARLY")
+    + "&details=" + encodeURIComponent(desc);
+
+  $("#icsBtn").addEventListener("click", () => {
+    const ics = [
+      "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Xerxes & Loraine//Wedding Album//EN",
+      "CALSCALE:GREGORIAN","BEGIN:VEVENT",
+      "UID:anniversary-" + day + "@xeraine",
+      "DTSTAMP:" + new Date().toISOString().replace(/[-:]/g,"").split(".")[0] + "Z",
+      "DTSTART;VALUE=DATE:" + day,
+      "DTEND;VALUE=DATE:"   + next,
+      "RRULE:FREQ=YEARLY",
+      "SUMMARY:" + title,
+      "DESCRIPTION:" + desc.replace(/,/g,"\\,"),
+      "URL:" + url,
+      "BEGIN:VALARM","TRIGGER:-P1D","ACTION:DISPLAY",
+      "DESCRIPTION:Xerxes & Loraine's anniversary is tomorrow",
+      "END:VALARM","END:VEVENT","END:VCALENDAR"
+    ].join("\r\n");
+    const blob = new Blob([ics], {type:"text/calendar;charset=utf-8"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "xerxes-loraine-anniversary.ics";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+})();
 
 /* ============================ videos ==================================== */
 (function videos(){
@@ -787,6 +1023,35 @@ async function loadGallery(){
   status.hidden = true;
   buildFilters();
   applyFilter();
+  photoOfTheDay();
+}
+
+/* Deterministic pick: everyone sees the same photo on the same day,
+   and it rolls over at midnight without any server involved. */
+function photoOfTheDay(){
+  if(gallery.all.length < 2) return;
+  const box = $("#potd");
+  const dayNumber = Math.floor(Date.now() / 86400000);
+  let idx = dayNumber % gallery.all.length;
+
+  const draw = () => {
+    const item = gallery.all[idx];
+    $("#potdImg").src = cld(item.id, 1100);
+    $("#potdDate").textContent = new Date().toLocaleDateString(undefined,
+      {weekday:"long", day:"numeric", month:"long"});
+  };
+  draw();
+  box.hidden = false;
+
+  $("#potdShuffle").addEventListener("click", () => {
+    idx = Math.floor(Math.random() * gallery.all.length);
+    draw();
+  });
+  $("#potdBtn").addEventListener("click", () => {
+    const inView = gallery.visible.indexOf(gallery.all[idx]);
+    if(inView >= 0) openLb(inView);
+    else window.open(cld(gallery.all[idx].id, 1800), "_blank", "noopener");
+  });
 }
 $("#loadMore").addEventListener("click", renderMore);
 loadGallery();
