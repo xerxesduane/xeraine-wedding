@@ -887,6 +887,8 @@ const SITE = {
     // "https://example.com/any-other-image.jpg"
   ],
   batchSize    : 60,                  // photos rendered per "Load more" tap
+  shuffle      : true,                // mix the order on every visit; set false for
+                                      // the photographer's original sequence
 
   /* ---- Sharing --------------------------------------------------------
      The canonical link guests pass on. Keep it matching the og:url and
@@ -919,6 +921,17 @@ function wire(btnSel, url, noteSel, msg){
   btn.hidden = true;
   note($(noteSel), msg);
   return false;
+}
+
+/* Fisher-Yates: every ordering equally likely, unlike sort(() => Math.random()-0.5),
+   which is biased and can even crash some engines. Returns a new array. */
+function shuffled(list){
+  const a = list.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 /* Cloudinary URL builder — f_auto/q_auto keeps the gallery fast on mobile. */
@@ -1159,7 +1172,9 @@ $("#thresholdBtn").href = SITE.thresholdUrl;
 
 /* ============================ gallery =================================== */
 const gallery = {
-  all: [], shown: 0, filter: "all", visible: []
+  all: [],        // display order — shuffled when SITE.shuffle is on
+  stable: [],     // fixed order, so photo of the day is the same for everyone
+  shown: 0, filter: "all", visible: []
 };
 
 function tileFor(item, i, items){
@@ -1246,7 +1261,8 @@ async function loadGroupPhotos(){
     else $("#groupDriveBtn").hidden = true;
   };
 
-  const items = await fetchTag(SITE.groupTag);
+  let items = await fetchTag(SITE.groupTag);
+  if(SITE.shuffle) items = shuffled(items);
   if(!items.length){
     // Nothing tagged yet — keep the whole section out of the way rather
     // than showing guests an empty grid, and hide the links pointing at
@@ -1278,7 +1294,7 @@ async function loadGroupPhotos(){
 async function loadGallery(){
   const status = $("#galleryStatus");
 
-  // B) manual highlights first — these always lead the grid
+  // B) any hand-picked highlights, mixed in with the rest
   (SITE.manualPhotos || []).forEach(p => gallery.all.push({ id:p, tags:["highlights"] }));
 
   // A) Cloudinary tag listing for the full set
@@ -1295,6 +1311,11 @@ async function loadGallery(){
     return;
   }
 
+  // Photo of the day must land on the same picture for every visitor, so it
+  // reads from a fixed ordering taken before any shuffling.
+  gallery.stable = gallery.all.slice().sort((a, b) => a.id.localeCompare(b.id));
+  if(SITE.shuffle) gallery.all = shuffled(gallery.all);
+
   status.hidden = true;
   buildFilters();
   applyFilter();
@@ -1304,13 +1325,14 @@ async function loadGallery(){
 /* Deterministic pick: everyone sees the same photo on the same day,
    and it rolls over at midnight without any server involved. */
 function photoOfTheDay(){
-  if(gallery.all.length < 2) return;
+  const pool = gallery.stable;
+  if(pool.length < 2) return;
   const box = $("#potd");
   const dayNumber = Math.floor(Date.now() / 86400000);
-  let idx = dayNumber % gallery.all.length;
+  let idx = dayNumber % pool.length;
 
   const draw = () => {
-    const item = gallery.all[idx];
+    const item = pool[idx];
     $("#potdImg").src = cld(item.id, 1100);
     $("#potdDate").textContent = new Date().toLocaleDateString(undefined,
       {weekday:"long", day:"numeric", month:"long"});
@@ -1319,13 +1341,13 @@ function photoOfTheDay(){
   box.hidden = false;
 
   $("#potdShuffle").addEventListener("click", () => {
-    idx = Math.floor(Math.random() * gallery.all.length);
+    idx = Math.floor(Math.random() * pool.length);
     draw();
   });
   $("#potdBtn").addEventListener("click", () => {
-    const inView = gallery.visible.indexOf(gallery.all[idx]);
+    const inView = gallery.visible.indexOf(pool[idx]);
     if(inView >= 0) openLb(inView, gallery.visible);
-    else window.open(cld(gallery.all[idx].id, 1800), "_blank", "noopener");
+    else window.open(cld(pool[idx].id, 1800), "_blank", "noopener");
   });
 }
 $("#loadMore").addEventListener("click", renderMore);
