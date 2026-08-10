@@ -16,6 +16,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="preconnect" href="https://static.zcal.co" crossorigin>
+<!-- Zcal booking widget -->
+<script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 <style>
   /* Same mobile-first, large-type system as the album page.
@@ -163,6 +166,15 @@
   .faq details[open] summary::after{content:'\2212';}
   .faq details[open] summary{border-bottom:1px solid var(--grey-line);}
   .faq p{padding:18px 22px 22px;font-size:17px;line-height:1.8;color:var(--grey);}
+
+  /* Zcal booking widget — white card so the calendar stays legible
+     against the navy section, and it never overflows a phone screen */
+  .booking{
+    margin-top:28px;background:var(--white);border-radius:4px;padding:12px;
+    min-height:120px;overflow-x:auto;
+  }
+  .booking .zcal-inline-widget{min-height:96px;}
+  .booking a{font-size:18px;font-weight:700;display:inline-flex;align-items:center;min-height:56px;padding:0 8px;}
 
   .setup{display:none;margin-top:20px;padding:16px 18px;border:2px solid var(--burgundy);background:var(--beige);border-radius:4px;font-size:16px;color:var(--navy);line-height:1.7;text-align:left;}
   .setup.show{display:block;}
@@ -372,8 +384,16 @@
       No slides and no pressure. Pick a time that suits you, and if none of them do,
       just message us and we will work around it.
     </p>
+    <!-- Zcal booking calendar. If the widget script is blocked or slow,
+         the link inside it stays clickable on its own. -->
+    <div class="booking" id="booking">
+      <div class="zcal-inline-widget">
+        <a href="https://zcal.co/i/ZRJE_JK4" target="_blank" rel="noopener">Ministry Partnership &mdash; schedule a meeting</a>
+      </div>
+    </div>
+
     <div class="btn-row">
-      <a class="btn on-dark" id="meetingBtn" href="#" target="_blank" rel="noopener">Book a time with us</a>
+      <a class="btn on-dark" id="meetingBtn" href="#" target="_blank" rel="noopener">Open the booking page</a>
       <a class="btn on-dark" id="thresholdBtn" href="https://threshold-dubai.vercel.app/" target="_blank" rel="noopener">Visit Threshold</a>
       <a class="btn on-dark" id="waBtn" href="#" target="_blank" rel="noopener" hidden>Message us</a>
     </div>
@@ -404,7 +424,7 @@ const STORY = {
   // Vimeo: https://player.vimeo.com/video/ID   Drive: .../file/d/ID/preview
   filmEmbed  : "PASTE_STORY_FILM_EMBED_URL",
 
-  meetingUrl : "PASTE_CALENDLY_LINK",
+  meetingUrl : "https://zcal.co/i/ZRJE_JK4",
   thresholdUrl:"https://threshold-dubai.vercel.app/",
   whatsapp   : "PASTE_WHATSAPP_LINK",   // e.g. https://wa.me/9715XXXXXXXX
 
@@ -454,7 +474,7 @@ if(isSet(STORY.meetingUrl)){
 }else{
   $("#meetingBtn").hidden = true;
   const s = $("#meetingSetup");
-  s.textContent = "Setup note (only shows until you fill it in): paste your Calendly link into STORY.meetingUrl in threshold.html.";
+  s.textContent = "Setup note (only shows until you fill it in): paste your Zcal link into STORY.meetingUrl in threshold.html.";
   s.classList.add("show");
 }
 if(isSet(STORY.whatsapp)){ const w = $("#waBtn"); w.href = STORY.whatsapp; w.hidden = false; }
