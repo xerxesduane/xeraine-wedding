@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="X and L">
+  <rect width="64" height="64" rx="10" fill="#1F2D4D"/>
+  <text x="32" y="43" text-anchor="middle" font-family="Georgia,'Times New Roman',serif"
+        font-size="30" fill="#E7DECF">X<tspan fill="#C9A0A8">&amp;</tspan>L</text>
+</svg>

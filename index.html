@@ -12,7 +12,12 @@
 <!-- Link previews for WhatsApp, Messenger, Facebook, iMessage, Viber,
      Telegram and the rest. Everything is an absolute https URL, because
      preview crawlers do not resolve relative paths. The image is served
-     at exactly 1200x630 so it is never re-cropped in the message bubble. -->
+     at exactly 1200x630 so it is never re-cropped in the message bubble.
+
+     The card is a real file in this repo rather than a remote transform:
+     same origin as the page, plain JPEG, 50KB, so there is no third-party
+     host, no WebP support question and no CDN cache to go stale. Swap
+     share-album.jpg for a photo export at the same size to change it. -->
 <link rel="canonical" href="https://xeraine.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Xerxes &amp; Loraine">
@@ -20,17 +25,24 @@
 <meta property="og:url" content="https://xeraine.vercel.app/">
 <meta property="og:title" content="Xerxes &amp; Loraine · Our Wedding Photos">
 <meta property="og:description" content="Look through the album from 7 August 2026, and add the photos you took.">
-<meta property="og:image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630/v1779567339/preview_image_evwxst.jpg">
-<meta property="og:image:secure_url" content="https://res.cloudinary.com/dymdk9ysp/image/upload/f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630/v1779567339/preview_image_evwxst.jpg">
+<meta property="og:image" content="https://xeraine.vercel.app/share-album.jpg">
+<meta property="og:image:secure_url" content="https://xeraine.vercel.app/share-album.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Xerxes and Loraine on their wedding day">
+<meta property="og:image:alt" content="Xerxes &amp; Loraine — our wedding photos, 7 August 2026">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Xerxes &amp; Loraine · Our Wedding Photos">
 <meta name="twitter:description" content="Look through the album from 7 August 2026, and add the photos you took.">
-<meta name="twitter:image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630/v1779567339/preview_image_evwxst.jpg">
-<meta name="twitter:image:alt" content="Xerxes and Loraine on their wedding day">
+<meta name="twitter:image" content="https://xeraine.vercel.app/share-album.jpg">
+<meta name="twitter:image:alt" content="Xerxes &amp; Loraine — our wedding photos, 7 August 2026">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- itemprop tags are the fallback a few older WhatsApp and Skype builds
+     read when they do not find Open Graph. Cheap insurance. -->
+<meta itemprop="name" content="Xerxes &amp; Loraine &middot; Our Wedding Photos">
+<meta itemprop="description" content="Look through the album from 7 August 2026, add the photos you took, and stay in touch.">
+<meta itemprop="image" content="https://xeraine.vercel.app/share-album.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
