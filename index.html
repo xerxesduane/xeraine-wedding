@@ -249,8 +249,30 @@
   .step span{display:block;margin-top:8px;font-size:17px;color:var(--grey);line-height:1.7;}
 
   /* ============ FORMS ============ */
-  .formbox{margin-top:28px;background:var(--white);border:1px solid var(--grey-line);border-radius:4px;overflow:hidden;}
-  .formbox iframe{width:100%;height:900px;border:0;display:block;}
+  /* Generous fields: 17-18px text (never the 16px iOS zoom trigger or below),
+     tall inputs, and labels above rather than placeholders inside, which
+     vanish the moment someone starts typing. */
+  .formbox{
+    margin-top:28px;background:var(--white);border:1px solid var(--grey-line);
+    border-radius:4px;padding:26px 22px;text-align:left;
+  }
+  @media (min-width:760px){ .formbox{padding:36px 34px;} }
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+  .field label .opt{font-weight:400;color:var(--grey);}
+  .field input,.field textarea{
+    width:100%;font-family:inherit;font-size:18px;line-height:1.6;color:var(--navy);
+    background:var(--white);border:2px solid var(--grey-line);border-radius:4px;
+    padding:14px 16px;min-height:56px;
+  }
+  .field textarea{min-height:150px;resize:vertical;}
+  .field input:focus,.field textarea:focus{outline:3px solid var(--burgundy);outline-offset:1px;border-color:var(--burgundy);}
+  /* the honeypot must stay in the DOM but never be reachable */
+  input[name="_gotcha"]{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;}
+  .form-status{margin-top:16px;font-size:17px;line-height:1.7;min-height:1px;}
+  .form-status.ok{color:var(--burgundy);font-weight:700;}
+  .form-status.bad{color:var(--burgundy);font-weight:700;}
+  #annivForm .field input{font-size:18px;}
 
   /* ============ ANNIVERSARY ============ */
   .anniv{display:grid;gap:18px;margin-top:32px;text-align:left;}
@@ -382,7 +404,7 @@
     <div class="rule"></div>
     <p class="lede">
       You made 7 August what it was. Our photographer sent us
-      <strong id="photoCountText">948</strong> photographs, the videographer sent the films, and
+      every photograph from the day, the videographer sent the films, and
       somewhere on your phone there are moments no professional could have caught.
     </p>
     <p class="lede">
@@ -513,9 +535,30 @@
       A blessing, a memory, a joke, or advice on marriage that you swear by.
       We will read every one, and we are printing them into the album.
     </p>
-    <div class="formbox" id="guestbookBox" hidden>
-      <iframe id="guestbookFrame" title="Guestbook form" loading="lazy" src="about:blank">Loading&hellip;</iframe>
-    </div>
+    <!-- Posts to Formspree. The action/method are real, so the form still
+         works if JavaScript never runs; the script just keeps you on the
+         page instead of sending you to Formspree's thank-you screen. -->
+    <form class="formbox" id="guestbookForm" method="POST" action="https://formspree.io/f/xeajakbv">
+      <input type="hidden" name="_subject" value="Wedding guestbook message">
+      <input type="hidden" name="form" value="Guestbook">
+      <!-- honeypot: real people never see or fill this -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="field">
+        <label for="gbName">Your name</label>
+        <input id="gbName" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="gbEmail">Your email <span class="opt">(optional &mdash; only so we can reply)</span></label>
+        <input id="gbEmail" name="email" type="email" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="gbMessage">Your message</label>
+        <textarea id="gbMessage" name="message" rows="6" required></textarea>
+      </div>
+      <button class="btn" type="submit">Send our note</button>
+      <p class="form-status" id="gbStatus" role="status" aria-live="polite"></p>
+    </form>
     <div class="setup" id="guestbookSetup"></div>
   </div>
 </section>
@@ -535,8 +578,22 @@
       <div class="panel">
         <h3>Get the yearly letter</h3>
         <p>Just your name and email address. We will never pass it on to anyone.</p>
-        <div id="annivFormBox" hidden><iframe id="annivFrame" title="Anniversary letter signup" loading="lazy" src="about:blank"></iframe></div>
-        <a class="btn" id="annivBtn" href="#" target="_blank" rel="noopener" hidden>Sign me up</a>
+        <form id="annivForm" method="POST" action="https://formspree.io/f/xeajakbv">
+          <input type="hidden" name="_subject" value="Anniversary letter signup">
+          <input type="hidden" name="form" value="Anniversary letter">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="field">
+            <label for="anName">Your name</label>
+            <input id="anName" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="anEmail">Your email</label>
+            <input id="anEmail" name="email" type="email" autocomplete="email" required>
+          </div>
+          <button class="btn" type="submit">Sign me up</button>
+          <p class="form-status" id="anStatus" role="status" aria-live="polite"></p>
+        </form>
         <div class="setup" id="annivSetup"></div>
       </div>
       <div class="panel">
@@ -625,7 +682,7 @@
   <div class="sheet">
     <button class="x" id="zipClose" aria-label="Close this box">&times;</button>
     <h3 id="zipTitle">Download all the photos</h3>
-    <p>All <span id="zipCount">948</span> pictures at full size. It is a big download, so use wi-fi if you can.</p>
+    <p>Every picture from the day, at full size. It is a big download, so use wi-fi if you can.</p>
     <ol>
       <li>Tap the button below. The folder opens in a new tab.</li>
       <li>On a computer, press <strong>Ctrl</strong> and <strong>A</strong> together (on a Mac, <strong>&#8984;</strong> and <strong>A</strong>) to select everything, then right-click and choose <strong>Download</strong>.</li>
@@ -657,7 +714,7 @@
 const SITE = {
 
   /* ---- Google Drive links -------------------------------------------- */
-  // Folder with all 948 professional photos (share: "Anyone with the link — Viewer")
+  // Folder with all the professional photos (share: "Anyone with the link — Viewer")
   driveAllPhotos : "https://drive.google.com/drive/folders/1hP1YFaEhdKJMVeNTOUcGoACrx9_bBENi",
   // Folder with the video files (can be the same folder)
   driveVideos    : "https://drive.google.com/drive/folders/1hP1YFaEhdKJMVeNTOUcGoACrx9_bBENi",
@@ -668,15 +725,11 @@ const SITE = {
   thresholdUrl   : "https://threshold-dubai.vercel.app/",
   meetingUrl     : "https://zcal.co/i/ZRJE_JK4",   // Zcal booking page
 
-  /* ---- Guestbook (optional) ------------------------------------------ */
-  // A Google Form embed URL, ending in /viewform?embedded=true
-  guestbookForm  : "PASTE_GUESTBOOK_GOOGLE_FORM_EMBED_URL",
-
-  /* ---- Yearly anniversary letter -------------------------------------
-     Either embed a Google Form (name + email) with `annivForm`, or just
-     link out to one / a newsletter signup with `annivLink`. Use one.   */
-  annivForm      : "PASTE_ANNIVERSARY_GOOGLE_FORM_EMBED_URL",
-  annivLink      : "PASTE_ANNIVERSARY_SIGNUP_LINK",
+  /* ---- Forms ----------------------------------------------------------
+     One Formspree endpoint powers both the guestbook and the yearly
+     letter signup. Each submission carries a "form" field so you can
+     tell them apart in your Formspree inbox.                         */
+  formEndpoint   : "https://formspree.io/f/xeajakbv",
 
   /* ---- Download all as ZIP -------------------------------------------
      Leave as-is to show guests how to bulk-download from Drive (Drive
@@ -702,7 +755,7 @@ const SITE = {
   /* ---- Photo gallery --------------------------------------------------
      Two ways to fill the on-site grid. Use either, or both.
 
-     A) CLOUDINARY TAG (recommended for all 948)
+     A) CLOUDINARY TAG (recommended for the full set)
         Upload the photos to Cloudinary and tag them, then set the tag here.
         In Cloudinary: Settings → Security → untick "Resource list" restriction
         so the public tag listing works.
@@ -720,7 +773,6 @@ const SITE = {
     // "https://example.com/any-other-image.jpg"
   ],
   batchSize    : 60,                  // photos rendered per "Load more" tap
-  totalPhotos  : 948,
 
   /* ---- The day itself (used by the calendar reminder) ---------------- */
   weddingDate  : { y:2026, m:8, d:7 }  // 7 August 2026
@@ -747,7 +799,7 @@ function wire(btnSel, url, noteSel, msg){
   return false;
 }
 
-/* Cloudinary URL builder — f_auto/q_auto keeps the 948 fast on mobile. */
+/* Cloudinary URL builder — f_auto/q_auto keeps the gallery fast on mobile. */
 function cld(publicId, w, extra){
   if(/^https?:\/\//.test(publicId)) return publicId;
   const t = ["f_auto","q_auto","c_limit","w_"+w].concat(extra||[]).join(",");
@@ -777,8 +829,6 @@ wire("#uploadBtn",     SITE.driveUpload,    "#uploadSetup",
 wire("#meetingBtn",    SITE.meetingUrl,     "#meetingSetup",
      "paste your Zcal (or other booking) link into SITE.meetingUrl.");
 $("#thresholdBtn").href = SITE.thresholdUrl;
-$("#photoCountText").textContent = SITE.totalPhotos.toLocaleString();
-$("#zipCount").textContent = SITE.totalPhotos.toLocaleString();
 
 /* ================= personalised greeting ================================
    Send each guest a link like  ?to=Maria  or  ?to=Tita%20Cora  and the page
@@ -825,18 +875,54 @@ $("#zipCount").textContent = SITE.totalPhotos.toLocaleString();
   document.addEventListener("keydown", e => { if(e.key === "Escape") close(); });
 })();
 
-/* ================= anniversary signup ================================== */
-(function anniversary(){
-  if(isSet(SITE.annivForm)){
-    $("#annivFrame").src = SITE.annivForm;
-    $("#annivFormBox").hidden = false;
-  }else if(isSet(SITE.annivLink)){
-    const b = $("#annivBtn"); b.href = SITE.annivLink; b.hidden = false;
-  }else{
-    note($("#annivSetup"),
-      "make a Google Form (Name + Email) and paste its embed URL into SITE.annivForm, " +
-      "or any signup link into SITE.annivLink.");
-  }
+/* ================= Formspree forms =====================================
+   Both forms post to the same endpoint. The <form> keeps a real action and
+   method, so with JavaScript off the browser submits normally and Formspree
+   shows its own thank-you page — the message still reaches you. With JS on,
+   we submit in the background and swap the form for a thank-you in place.
+   ====================================================================== */
+(function forms(){
+  const endpoint = SITE.formEndpoint;
+
+  const setup = (formSel, statusSel, noteSel, thanks, noteMsg) => {
+    const form = $(formSel);
+    if(!form) return;
+    if(!isSet(endpoint)){ form.hidden = true; note($(noteSel), noteMsg); return; }
+
+    form.action = endpoint;   // keep markup and config in step
+    const status = $(statusSel);
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const btn = form.querySelector("button[type=submit]");
+      const label = btn.textContent;
+      btn.disabled = true; btn.textContent = "Sending…";
+      status.className = "form-status"; status.textContent = "";
+
+      try{
+        const r = await fetch(endpoint, {
+          method:"POST",
+          body: new FormData(form),
+          headers:{ "Accept":"application/json" }
+        });
+        if(!r.ok) throw new Error("Formspree responded " + r.status);
+        form.innerHTML = `<p class="form-status ok">${thanks}</p>`;
+      }catch(err){
+        btn.disabled = false; btn.textContent = label;
+        status.className = "form-status bad";
+        status.innerHTML = "Sorry — that did not send. Please try once more, or email us at " +
+          '<a href="mailto:hi@xerxesduane.com">hi@xerxesduane.com</a>.';
+      }
+    });
+  };
+
+  setup("#guestbookForm", "#gbStatus", "#guestbookSetup",
+        "Thank you — we have your note, and we are already looking forward to reading it.",
+        "paste your Formspree endpoint into SITE.formEndpoint.");
+
+  setup("#annivForm", "#anStatus", "#annivSetup",
+        "You are on the list. Look out for us every 7th of August.",
+        "paste your Formspree endpoint into SITE.formEndpoint.");
 })();
 
 /* ================= anniversary calendar reminder ======================= */
@@ -900,17 +986,6 @@ $("#zipCount").textContent = SITE.totalPhotos.toLocaleString();
       </div>
       <div class="body"><h3>${v.title}</h3><p>${v.note||""}</p></div>
     </article>`).join("");
-})();
-
-/* ============================ guestbook ================================= */
-(function guestbook(){
-  if(isSet(SITE.guestbookForm)){
-    $("#guestbookFrame").src = SITE.guestbookForm;
-    $("#guestbookBox").hidden = false;
-  }else{
-    note($("#guestbookSetup"),
-      "make a short Google Form (Name + Your message) and paste its embed URL into SITE.guestbookForm.");
-  }
 })();
 
 /* ============================ gallery =================================== */
