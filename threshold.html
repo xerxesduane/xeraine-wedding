@@ -53,6 +53,9 @@
     -webkit-font-smoothing:antialiased;overflow-x:hidden;
   }
   img{display:block;max-width:100%;}
+  /* Elements given display:flex/grid below would otherwise ignore the
+     hidden attribute entirely, leaving dead buttons on the page. */
+  [hidden]{display:none !important;}
   a{color:var(--burgundy);}
   a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--burgundy);outline-offset:3px;border-radius:2px;}
   .skip{position:absolute;left:-9999px;top:0;z-index:300;background:var(--burgundy);color:#fff;padding:16px 24px;text-decoration:none;font-size:17px;}
