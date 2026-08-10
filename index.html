@@ -66,6 +66,9 @@
     -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
   img{display:block;max-width:100%;}
+  /* Elements given display:flex/grid below would otherwise ignore the
+     hidden attribute entirely, leaving dead buttons on the page. */
+  [hidden]{display:none !important;}
   a{color:var(--burgundy);}
 
   /* visible keyboard focus — important for anyone not using a mouse */
@@ -210,6 +213,15 @@
   .potd h3{font-size:26px;color:var(--navy);}
   .potd p{margin-top:10px;font-size:17px;color:var(--grey);line-height:1.7;}
   .potd .btn{margin-top:20px;}
+
+  /* ============ GROUP PHOTOS ============ */
+  /* Deliberately set apart from the main album: beige ground, a burgundy
+     rule down the left, and larger tiles, because this is the section most
+     guests are actually hunting for. */
+  .section.groups{background:var(--beige);border-top:5px solid var(--burgundy);}
+  .section.groups .grid{grid-template-columns:repeat(2,1fr);}
+  @media (min-width:700px){ .section.groups .grid{grid-template-columns:repeat(3,1fr);} }
+  .section.groups .tile{aspect-ratio:3/2;background:var(--beige-deep);}
 
   /* ============ GALLERY ============ */
   .filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:28px;}
@@ -396,7 +408,8 @@
   <div class="bar">
     <a class="mark" href="#top">Xerxes &amp; Loraine</a>
     <div class="links">
-      <a href="#photos">Photos</a>
+      <a href="#groups">Group photos</a>
+      <a href="#photos">All photos</a>
       <a href="#videos">Videos</a>
       <a href="#share">Add yours</a>
       <a href="#anniversary">Keep in touch</a>
@@ -445,8 +458,8 @@
     <div class="cards">
       <div class="card">
         <h3>The photos</h3>
-        <p>Every picture from our photographer. Look through them here, or download any one of them.</p>
-        <a class="more" href="#photos">See the photos &rarr;</a>
+        <p>Every picture from our photographer &mdash; starting with the group shots, so you can find yours quickly.</p>
+        <a class="more" href="#groups">See the photos &rarr;</a>
       </div>
       <div class="card">
         <h3>The videos</h3>
@@ -463,6 +476,32 @@
         <p>Our life after the wedding has a purpose attached to it. We would love to tell you about it.</p>
         <a class="more" href="#threshold">Read our invitation &rarr;</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GROUP PHOTOS ============ -->
+<section class="section groups" id="groups" hidden>
+  <div class="wrap center reveal">
+    <div class="eyebrow">Find yourself</div>
+    <h2 class="title">The group photos</h2>
+    <div class="rule"></div>
+    <p class="lede">
+      Every family, every barkada, every table we managed to gather.
+      This is the one most people come looking for &mdash; so we have put it first.
+      Tap a photo to see it large, then use <strong>Download</strong> to keep it.
+    </p>
+
+    <div class="grid" id="groupGrid"></div>
+    <div class="gallery-status" id="groupStatus">Loading the group photos&hellip;</div>
+    <div class="more-wrap">
+      <button class="btn" id="groupMore" hidden>Show more group photos</button>
+      <div class="count" id="groupCount"></div>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn navy" id="groupDriveBtn" href="#" target="_blank" rel="noopener">Download the group photos</a>
+      <a class="btn quiet" href="#photos">See the rest of the album</a>
     </div>
   </div>
 </section>
@@ -728,7 +767,8 @@
     <div class="names">Xerxes &amp; Loraine</div>
     <div class="sub">7 August 2026 &middot; Tagaytay</div>
     <div class="flinks">
-      <a href="#photos">Photos</a>
+      <a href="#groups">Group photos</a>
+      <a href="#photos">All photos</a>
       <a href="#videos">Videos</a>
       <a href="#share">Add yours</a>
       <a href="#guestbook">Guestbook</a>
@@ -833,6 +873,14 @@ const SITE = {
      -------------------------------------------------------------------- */
   cloudName    : "dymdk9ysp",
   cloudinaryTag: "wedding",           // set to "" to disable the auto listing
+
+  /* ---- Group photos ---------------------------------------------------
+     Given their own section above the main album, because these are the
+     ones guests hunt for. Driven by a separate Cloudinary tag, and with
+     their own Drive folder for downloads.                             */
+  groupTag       : "group",
+  groupDriveUrl  : "https://drive.google.com/drive/folders/1CEcHga2nozo7vCtmuwcQftjyMZBmxZPj",
+  groupBatchSize : 24,
   moments      : ["ceremony","portraits","reception","party"], // filter chips; [] to hide
   manualPhotos : [
     // "v1779555345/desert_ctnw3d.jpg",
@@ -1114,7 +1162,7 @@ const gallery = {
   all: [], shown: 0, filter: "all", visible: []
 };
 
-function tileFor(item, i){
+function tileFor(item, i, items){
   const b = document.createElement("button");
   b.className = "tile";
   b.type = "button";
@@ -1126,7 +1174,7 @@ function tileFor(item, i){
   img.addEventListener("load", ()=>img.classList.add("loaded"), {once:true});
   img.addEventListener("error", ()=>b.remove(), {once:true});
   b.appendChild(img);
-  b.addEventListener("click", ()=>openLb(i));
+  b.addEventListener("click", ()=>openLb(i, items));
   return b;
 }
 
@@ -1142,7 +1190,7 @@ function applyFilter(){
 function renderMore(){
   const frag = document.createDocumentFragment();
   const end = Math.min(gallery.shown + SITE.batchSize, gallery.visible.length);
-  for(let i = gallery.shown; i < end; i++) frag.appendChild(tileFor(gallery.visible[i], i));
+  for(let i = gallery.shown; i < end; i++) frag.appendChild(tileFor(gallery.visible[i], i, gallery.visible));
   $("#grid").appendChild(frag);
   gallery.shown = end;
 
@@ -1173,6 +1221,60 @@ function buildFilters(){
   present.forEach(m => box.appendChild(mk(m, m)));
 }
 
+/* Fetch one Cloudinary tag listing. Returns [] on any failure, so a
+   blocked or disabled listing degrades to the Drive buttons rather than
+   throwing. */
+async function fetchTag(tag){
+  if(!isSet(tag)) return [];
+  try{
+    const r = await fetch(`https://res.cloudinary.com/${SITE.cloudName}/image/list/${tag}.json`,
+                          {cache:"no-store"});
+    if(!r.ok) return [];
+    const data = await r.json();
+    return (data.resources || []).map(res => ({
+      id: `v${res.version}/${res.public_id}.${res.format}`,
+      tags: res.tags || []
+    }));
+  }catch(e){ return []; }
+}
+
+/* ---------------------------- group photos ----------------------------- */
+async function loadGroupPhotos(){
+  const section = $("#groups");
+  const wire = () => {
+    if(isSet(SITE.groupDriveUrl)) $("#groupDriveBtn").href = SITE.groupDriveUrl;
+    else $("#groupDriveBtn").hidden = true;
+  };
+
+  const items = await fetchTag(SITE.groupTag);
+  if(!items.length){
+    // Nothing tagged yet — keep the whole section out of the way rather
+    // than showing guests an empty grid, and hide the links pointing at
+    // it so nobody taps through to nothing.
+    section.hidden = true;
+    $$('a[href="#groups"]').forEach(a => a.hidden = true);
+    return;
+  }
+
+  section.hidden = false;
+  wire();
+  $("#groupStatus").hidden = true;
+
+  let shown = 0;
+  const grid = $("#groupGrid"), more = $("#groupMore"), count = $("#groupCount");
+  const render = () => {
+    const frag = document.createDocumentFragment();
+    const end = Math.min(shown + (SITE.groupBatchSize || 24), items.length);
+    for(let i = shown; i < end; i++) frag.appendChild(tileFor(items[i], i, items));
+    grid.appendChild(frag);
+    shown = end;
+    more.hidden = shown >= items.length;
+    count.textContent = `Showing ${shown} of ${items.length}`;
+  };
+  more.addEventListener("click", render);
+  render();
+}
+
 async function loadGallery(){
   const status = $("#galleryStatus");
 
@@ -1180,21 +1282,7 @@ async function loadGallery(){
   (SITE.manualPhotos || []).forEach(p => gallery.all.push({ id:p, tags:["highlights"] }));
 
   // A) Cloudinary tag listing for the full set
-  if(isSet(SITE.cloudinaryTag)){
-    try{
-      const r = await fetch(`https://res.cloudinary.com/${SITE.cloudName}/image/list/${SITE.cloudinaryTag}.json`,
-                            {cache:"no-store"});
-      if(r.ok){
-        const data = await r.json();
-        (data.resources || []).forEach(res => {
-          gallery.all.push({
-            id: `v${res.version}/${res.public_id}.${res.format}`,
-            tags: res.tags || []
-          });
-        });
-      }
-    }catch(e){ /* offline or listing disabled — fall through to Drive */ }
-  }
+  (await fetchTag(SITE.cloudinaryTag)).forEach(p => gallery.all.push(p));
 
   if(!gallery.all.length){
     status.textContent = "";
@@ -1236,18 +1324,24 @@ function photoOfTheDay(){
   });
   $("#potdBtn").addEventListener("click", () => {
     const inView = gallery.visible.indexOf(gallery.all[idx]);
-    if(inView >= 0) openLb(inView);
+    if(inView >= 0) openLb(inView, gallery.visible);
     else window.open(cld(gallery.all[idx].id, 1800), "_blank", "noopener");
   });
 }
 $("#loadMore").addEventListener("click", renderMore);
 loadGallery();
+loadGroupPhotos();
 
 /* ============================ lightbox ================================== */
 const lb = $("#lb"), stage = $("#lbStage"), cap = $("#lbCap");
 let lbIndex = 0;
 
-function openLb(i){
+/* The viewer holds whichever set opened it — the group photos or the
+   full album — so Back/Next stay inside that set. */
+let lbItems = [];
+
+function openLb(i, items){
+  lbItems = items || gallery.visible;
   lbIndex = i;
   drawLb();
   lb.classList.add("open");
@@ -1259,16 +1353,16 @@ function closeLb(){
   document.body.style.overflow = "";
 }
 function step(d){
-  if(!gallery.visible.length) return;
-  lbIndex = (lbIndex + d + gallery.visible.length) % gallery.visible.length;
+  if(!lbItems.length) return;
+  lbIndex = (lbIndex + d + lbItems.length) % lbItems.length;
   drawLb();
 }
 function drawLb(){
-  const item = gallery.visible[lbIndex];
+  const item = lbItems[lbIndex];
   if(!item) return;
   const full = cld(item.id, 1800);
   stage.innerHTML = `<img src="${full}" alt="Wedding photo ${lbIndex+1}">`;
-  cap.innerHTML = `${lbIndex+1} / ${gallery.visible.length}
+  cap.innerHTML = `${lbIndex+1} / ${lbItems.length}
     &nbsp;&middot;&nbsp; <a href="${full}" target="_blank" rel="noopener" download>Download</a>`;
 }
 $("#lbClose").addEventListener("click", closeLb);
