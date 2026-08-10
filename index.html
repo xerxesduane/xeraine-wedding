@@ -483,13 +483,19 @@
 
     <div class="upload-box">
       <h3>Put them in our shared folder</h3>
-      <p>Photos and videos are both welcome. There is no limit, and nothing is too small.</p>
+      <p>
+        Photos and videos are both welcome. There is no limit, and nothing is too small.
+        You will need to be signed in to a Gmail account &mdash; that is Google's rule, not ours.
+      </p>
+      <p>
+        If that is a nuisance, just send them to us on WhatsApp instead and we will add them for you.
+      </p>
       <div class="btn-row" style="justify-content:center;">
         <a class="btn" id="uploadBtn" href="#" target="_blank" rel="noopener">Add your photos and videos</a>
       </div>
       <div class="steps">
-        <div class="step"><b>1. Tap the button</b><span>The folder opens in a new tab. You do not need to sign up for anything.</span></div>
-        <div class="step"><b>2. Choose your files</b><span>Use the <strong>New</strong> button, then <strong>File upload</strong>. You can pick many at once.</span></div>
+        <div class="step"><b>1. Tap the button</b><span>The folder opens in a new tab. Google will ask you to sign in with a Gmail account first &mdash; any one you already have is fine.</span></div>
+        <div class="step"><b>2. Choose your files</b><span>Use the <strong>New</strong> button, then <strong>File upload</strong>. You can pick many photos at once.</span></div>
         <div class="step"><b>3. Tell us who you are</b><span>If you can, put your name in the file name. It helps us thank you properly.</span></div>
       </div>
       <div class="setup" id="uploadSetup"></div>
@@ -656,11 +662,11 @@ const SITE = {
   // Folder with the video files (can be the same folder)
   driveVideos    : "https://drive.google.com/drive/folders/1hP1YFaEhdKJMVeNTOUcGoACrx9_bBENi",
   // Folder guests upload into (share: "Anyone with the link — Contributor/Editor")
-  driveUpload    : "PASTE_DRIVE_UPLOAD_FOLDER_LINK",
+  driveUpload    : "https://drive.google.com/drive/folders/1_EFiYhDMuib6Hko_Bq1TTqy4K1ullIHw",
 
   /* ---- Ministry partnership ------------------------------------------ */
   thresholdUrl   : "https://threshold-dubai.vercel.app/",
-  meetingUrl     : "PASTE_CALENDLY_LINK",     // e.g. https://calendly.com/xerxes/coffee
+  meetingUrl     : "https://zcal.co/i/ZRJE_JK4",   // Zcal booking page
 
   /* ---- Guestbook (optional) ------------------------------------------ */
   // A Google Form embed URL, ending in /viewform?embedded=true
@@ -769,7 +775,7 @@ wire("#driveVideoBtn", SITE.driveVideos,    "#videosSetup",
 wire("#uploadBtn",     SITE.driveUpload,    "#uploadSetup",
      "create a Drive folder shared as “Anyone with the link → Contributor” and paste it into SITE.driveUpload.");
 wire("#meetingBtn",    SITE.meetingUrl,     "#meetingSetup",
-     "paste your Calendly (or other booking) link into SITE.meetingUrl.");
+     "paste your Zcal (or other booking) link into SITE.meetingUrl.");
 $("#thresholdBtn").href = SITE.thresholdUrl;
 $("#photoCountText").textContent = SITE.totalPhotos.toLocaleString();
 $("#zipCount").textContent = SITE.totalPhotos.toLocaleString();
