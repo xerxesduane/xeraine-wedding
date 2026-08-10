@@ -8,11 +8,26 @@
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 <meta name="googlebot" content="noindex, nofollow, noimageindex">
 <meta name="theme-color" content="#1F2D4D">
+<!-- Link previews for WhatsApp, Messenger, Facebook, iMessage and the rest.
+     Absolute https URLs only — preview crawlers do not resolve relative paths. -->
+<link rel="canonical" href="https://xeraine.vercel.app/threshold.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Why Dubai, Why Now · Xerxes & Loraine">
-<meta property="og:description" content="The story behind Threshold, and an invitation to walk it with us.">
+<meta property="og:site_name" content="Xerxes &amp; Loraine">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://xeraine.vercel.app/threshold.html">
+<meta property="og:title" content="Why Dubai, why now &middot; Xerxes &amp; Loraine">
+<meta property="og:description" content="A prayer, a heartbreak, a hundred dollars, and one man in a crowd of five thousand. The story behind Threshold.">
 <meta property="og:image" content="https://threshold-dubai.vercel.app/images/threshold-dubai-hero.webp">
+<meta property="og:image:secure_url" content="https://threshold-dubai.vercel.app/images/threshold-dubai-hero.webp">
+<meta property="og:image:type" content="image/webp">
+<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="864">
+<meta property="og:image:alt" content="Threshold Dubai">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why Dubai, why now &middot; Xerxes &amp; Loraine">
+<meta name="twitter:description" content="A prayer, a heartbreak, a hundred dollars, and one man in a crowd of five thousand.">
+<meta name="twitter:image" content="https://threshold-dubai.vercel.app/images/threshold-dubai-hero.webp">
+<meta name="twitter:image:alt" content="Threshold Dubai">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
@@ -177,6 +192,22 @@
   .booking .zcal-inline-widget{min-height:96px;}
   .booking a{font-size:18px;font-weight:700;display:inline-flex;align-items:center;min-height:56px;padding:0 8px;}
 
+  /* share */
+  .share{display:grid;gap:12px;margin-top:32px;}
+  @media (min-width:620px){ .share{grid-auto-flow:column;grid-auto-columns:1fr;} }
+  @media (min-width:620px) and (max-width:900px){ .share{grid-auto-flow:row;grid-template-columns:repeat(2,1fr);} }
+  .share-btn{
+    display:flex;align-items:center;justify-content:center;gap:10px;min-height:60px;padding:14px 20px;
+    border-radius:4px;border:2px solid rgba(255,255,255,.6);background:transparent;color:#fff;
+    font-family:inherit;font-size:17px;font-weight:700;text-decoration:none;cursor:pointer;
+    transition:background .2s ease,color .2s ease;
+  }
+  .share-btn span{font-size:20px;line-height:1;}
+  .share-btn:hover{background:#fff;color:var(--navy);}
+  .share-btn.native{background:var(--beige);border-color:var(--beige);color:var(--navy);}
+  .share-btn.native:hover{background:#fff;}
+  .share-status{margin-top:18px;font-size:17px;font-weight:700;color:var(--beige-deep);min-height:1.6em;}
+
   .setup{display:none;margin-top:20px;padding:16px 18px;border:2px solid var(--burgundy);background:var(--beige);border-radius:4px;font-size:16px;color:var(--navy);line-height:1.7;text-align:left;}
   .setup.show{display:block;}
   .section.deep .setup{background:rgba(255,255,255,.1);border-color:var(--beige-deep);color:#fff;}
@@ -216,22 +247,11 @@
 
 <main id="main">
 
-<!-- ============ THE FILM ============ -->
-<section class="section">
-  <div class="narrow center reveal">
-    <div class="eyebrow">Two minutes</div>
-    <h2 class="title">If you only have a moment</h2>
-    <div class="rule"></div>
-    <p class="body">Watch this instead of reading. It is short, and it is us, unrehearsed.</p>
-    <div class="film" id="film">
-      <div class="empty" id="filmEmpty">
-        <span>&#9658;</span>
-        <small>Your two-minute story film goes here. Record it on a phone, upload it to YouTube
-        as <em>Unlisted</em>, then paste the embed link into STORY.filmEmbed in threshold.html.</small>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- The two-minute story film section lived here and was removed for now.
+     To bring it back: restore a <section> with a .film container, put the
+     YouTube/Vimeo embed URL in STORY.filmEmbed below, and re-add the small
+     block of film JS at the bottom of this file. The .film CSS is still in
+     the stylesheet above, so nothing else needs to change. -->
 
 <!-- ============ CHAPTERS ============ -->
 <section class="section beige">
@@ -496,6 +516,29 @@
       <a class="btn on-dark" id="waBtn" href="#" target="_blank" rel="noopener" hidden>Message us</a>
     </div>
     <div class="setup" id="meetingSetup"></div>
+
+    <div class="rule" style="margin:44px auto 0;"></div>
+    <p class="body" style="margin-top:24px;">
+      Know someone who should read this? Send it to them.
+    </p>
+    <div class="share" id="share">
+      <button class="share-btn native" id="shareNative" type="button" hidden>
+        <span aria-hidden="true">&#10150;</span> Share this story
+      </button>
+      <a class="share-btn" id="shareWa" href="#" target="_blank" rel="noopener">
+        <span aria-hidden="true">&#128172;</span> WhatsApp
+      </a>
+      <a class="share-btn" id="shareFb" href="#" target="_blank" rel="noopener">
+        <span aria-hidden="true">&#119891;</span> Facebook
+      </a>
+      <a class="share-btn" id="shareMail" href="#">
+        <span aria-hidden="true">&#9993;</span> Email
+      </a>
+      <button class="share-btn" id="shareCopy" type="button">
+        <span aria-hidden="true">&#128279;</span> Copy the link
+      </button>
+    </div>
+    <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
   </div>
 </section>
 </main>
@@ -518,13 +561,19 @@
    STORY CONFIG — edit these, save, deploy. Placeholders hide themselves.
    ========================================================================= */
 const STORY = {
+  // The story film section is removed for now — see the note further up
+  // this file for how to put it back when the film is ready.
   // YouTube (Unlisted is fine): https://www.youtube.com/embed/VIDEO_ID
-  // Vimeo: https://player.vimeo.com/video/ID   Drive: .../file/d/ID/preview
   filmEmbed  : "PASTE_STORY_FILM_EMBED_URL",
 
   meetingUrl : "https://zcal.co/i/ZRJE_JK4",
   thresholdUrl:"https://threshold-dubai.vercel.app/",
   whatsapp   : "PASTE_WHATSAPP_LINK",   // e.g. https://wa.me/9715XXXXXXXX
+
+  // Keep these matching the og:url and canonical tags in the <head>.
+  shareUrl   : "https://xeraine.vercel.app/threshold.html",
+  shareTitle : "Why Dubai, why now · Xerxes & Loraine",
+  shareText  : "This is the story behind what Xerxes & Loraine are building in Dubai —",
 
   facts: [
     { n:"3",   label:"years in Dubai" },
@@ -550,17 +599,6 @@ const io = new IntersectionObserver(es => {
 }, {threshold:.12});
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-/* film */
-if(isSet(STORY.filmEmbed)){
-  $("#filmEmpty").remove();
-  const f = document.createElement("iframe");
-  f.src = STORY.filmEmbed; f.title = "Our story";
-  f.loading = "lazy"; f.allowFullscreen = true;
-  f.setAttribute("allow","accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
-  f.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
-  $("#film").appendChild(f);
-}
-
 /* facts */
 $("#facts").innerHTML = STORY.facts
   .map(f => `<div class="fact"><b>${f.n}</b><span>${f.label}</span></div>`).join("");
@@ -576,6 +614,43 @@ if(isSet(STORY.meetingUrl)){
   s.classList.add("show");
 }
 if(isSet(STORY.whatsapp)){ const w = $("#waBtn"); w.href = STORY.whatsapp; w.hidden = false; }
+
+/* sharing — one canonical link, so previews stay consistent */
+(function share(){
+  const box = $("#share");
+  if(!box) return;
+  const url = STORY.shareUrl, title = STORY.shareTitle;
+  const blurb = STORY.shareText;
+  const msg = `${blurb} ${url}`;
+
+  $("#shareWa").href   = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msg);
+  $("#shareFb").href   = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+  $("#shareMail").href = "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(msg);
+
+  const status = $("#shareStatus");
+  const say = t => { status.textContent = t; setTimeout(() => { status.textContent = ""; }, 4000); };
+
+  if(navigator.share){
+    const nb = $("#shareNative");
+    nb.hidden = false;
+    nb.addEventListener("click", async () => {
+      try{ await navigator.share({ title, text: blurb, url }); }catch(e){}
+    });
+  }
+
+  $("#shareCopy").addEventListener("click", async () => {
+    try{
+      await navigator.clipboard.writeText(url);
+      say("Link copied. Paste it anywhere.");
+    }catch(e){
+      const t = document.createElement("input");
+      t.value = url; document.body.appendChild(t); t.select();
+      try{ document.execCommand("copy"); say("Link copied. Paste it anywhere."); }
+      catch(_){ say(url); }
+      t.remove();
+    }
+  });
+})();
 
 /* carry a personalised ?to= name across from the album page */
 (function carryName(){

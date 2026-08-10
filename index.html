@@ -9,16 +9,28 @@
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 <meta name="googlebot" content="noindex, nofollow, noimageindex">
 <meta name="theme-color" content="#1F2D4D">
+<!-- Link previews for WhatsApp, Messenger, Facebook, iMessage, Viber,
+     Telegram and the rest. Everything is an absolute https URL, because
+     preview crawlers do not resolve relative paths. The image is served
+     at exactly 1200x630 so it is never re-cropped in the message bubble. -->
+<link rel="canonical" href="https://xeraine.vercel.app/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Xerxes &amp; Loraine">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://xeraine.vercel.app/">
 <meta property="og:title" content="Xerxes &amp; Loraine · Our Wedding Photos">
 <meta property="og:description" content="Look through the album from 7 August 2026, and add the photos you took.">
-<meta property="og:image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/v1779567339/preview_image_evwxst.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630/v1779567339/preview_image_evwxst.jpg">
+<meta property="og:image:secure_url" content="https://res.cloudinary.com/dymdk9ysp/image/upload/f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630/v1779567339/preview_image_evwxst.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Xerxes and Loraine on their wedding day">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Xerxes &amp; Loraine · Our Wedding Photos">
 <meta name="twitter:description" content="Look through the album from 7 August 2026, and add the photos you took.">
-<meta name="twitter:image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/v1779567339/preview_image_evwxst.jpg">
+<meta name="twitter:image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630/v1779567339/preview_image_evwxst.jpg">
+<meta name="twitter:image:alt" content="Xerxes and Loraine on their wedding day">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
@@ -273,6 +285,25 @@
   .form-status.ok{color:var(--burgundy);font-weight:700;}
   .form-status.bad{color:var(--burgundy);font-weight:700;}
   #annivForm .field input{font-size:18px;}
+
+  /* ============ SHARE ============ */
+  .share{display:grid;gap:12px;margin-top:32px;}
+  @media (min-width:620px){ .share{grid-auto-flow:column;grid-auto-columns:1fr;} }
+  @media (min-width:620px) and (max-width:900px){
+    .share{grid-auto-flow:row;grid-template-columns:repeat(2,1fr);}
+  }
+  .share-btn{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    min-height:60px;padding:14px 20px;border-radius:4px;border:2px solid var(--navy);
+    background:var(--white);color:var(--navy);
+    font-family:inherit;font-size:17px;font-weight:700;text-decoration:none;cursor:pointer;
+    transition:background .2s ease,color .2s ease;
+  }
+  .share-btn span{font-size:20px;line-height:1;}
+  .share-btn:hover{background:var(--navy);color:#fff;}
+  .share-btn.native{background:var(--burgundy);border-color:var(--burgundy);color:#fff;}
+  .share-btn.native:hover{background:var(--burgundy-deep);border-color:var(--burgundy-deep);}
+  .share-status{margin-top:18px;font-size:17px;font-weight:700;color:var(--burgundy);min-height:1.6em;}
 
   /* ============ ANNIVERSARY ============ */
   .anniv{display:grid;gap:18px;margin-top:32px;text-align:left;}
@@ -563,6 +594,38 @@
   </div>
 </section>
 
+<!-- ============ SHARE ============ -->
+<section class="section" id="sharelink">
+  <div class="wrap center reveal">
+    <div class="eyebrow">Pass it on</div>
+    <h2 class="title">Send this to someone who was there</h2>
+    <div class="rule"></div>
+    <p class="lede">
+      Not everyone has the link yet. If you know someone who was with us that day &mdash;
+      or someone who wishes they could have been &mdash; send it their way.
+    </p>
+
+    <div class="share" id="share">
+      <button class="share-btn native" id="shareNative" type="button" hidden>
+        <span aria-hidden="true">&#10150;</span> Share this page
+      </button>
+      <a class="share-btn wa" id="shareWa" href="#" target="_blank" rel="noopener">
+        <span aria-hidden="true">&#128172;</span> WhatsApp
+      </a>
+      <a class="share-btn fb" id="shareFb" href="#" target="_blank" rel="noopener">
+        <span aria-hidden="true">&#119891;</span> Facebook
+      </a>
+      <a class="share-btn mail" id="shareMail" href="#">
+        <span aria-hidden="true">&#9993;</span> Email
+      </a>
+      <button class="share-btn copy" id="shareCopy" type="button">
+        <span aria-hidden="true">&#128279;</span> Copy the link
+      </button>
+    </div>
+    <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
 <!-- ============ ANNIVERSARY ============ -->
 <section class="section beige" id="anniversary">
   <div class="wrap center reveal">
@@ -777,6 +840,14 @@ const SITE = {
   ],
   batchSize    : 60,                  // photos rendered per "Load more" tap
 
+  /* ---- Sharing --------------------------------------------------------
+     The canonical link guests pass on. Keep it matching the og:url and
+     canonical tags in the <head>, and change all three together if the
+     site ever moves to its own domain.                                */
+  shareUrl     : "https://xeraine.vercel.app/",
+  shareTitle   : "Xerxes & Loraine · Our Wedding Photos",
+  shareText    : "The photos from Xerxes & Loraine's wedding are up —",
+
   /* ---- The day itself (used by the calendar reminder) ---------------- */
   weddingDate  : { y:2026, m:8, d:7 }  // 7 August 2026
 };
@@ -856,6 +927,53 @@ $("#thresholdBtn").href = SITE.thresholdUrl;
   $$('a[href^="threshold.html"], a[href^="wedding-invitation.html"]').forEach(a => {
     const [path, hash=""] = a.getAttribute("href").split("#");
     a.setAttribute("href", path + "?to=" + encodeURIComponent(clean) + (hash ? "#"+hash : ""));
+  });
+})();
+
+/* ================= sharing ==============================================
+   One canonical link for everyone, so previews stay consistent and a
+   personalised ?to= name is never passed on to somebody else by accident.
+   ====================================================================== */
+(function share(){
+  const box = $("#share");
+  if(!box) return;
+
+  const url   = SITE.shareUrl || (location.origin + location.pathname);
+  const title = SITE.shareTitle || document.title;
+  const blurb = SITE.shareText  || "Photos from our wedding day.";
+  const msg   = `${blurb} ${url}`;
+
+  $("#shareWa").href   = "https://api.whatsapp.com/send?text=" + encodeURIComponent(msg);
+  $("#shareFb").href   = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+  $("#shareMail").href = "mailto:?subject=" + encodeURIComponent(title) +
+                         "&body=" + encodeURIComponent(msg);
+
+  const status = $("#shareStatus");
+  const say = t => { status.textContent = t; setTimeout(() => { status.textContent = ""; }, 4000); };
+
+  /* On a phone this opens the real share sheet — Messenger, Viber, iMessage,
+     Telegram, whatever they actually use — so we do not have to guess. */
+  if(navigator.share){
+    const nb = $("#shareNative");
+    nb.hidden = false;
+    nb.addEventListener("click", async () => {
+      try{ await navigator.share({ title, text: blurb, url }); }
+      catch(e){ /* they closed the sheet — nothing to report */ }
+    });
+  }
+
+  $("#shareCopy").addEventListener("click", async () => {
+    try{
+      await navigator.clipboard.writeText(url);
+      say("Link copied. Paste it anywhere.");
+    }catch(e){
+      // clipboard blocked (older browsers, or a page served over plain http)
+      const t = document.createElement("input");
+      t.value = url; document.body.appendChild(t); t.select();
+      try{ document.execCommand("copy"); say("Link copied. Paste it anywhere."); }
+      catch(_){ say(url); }
+      t.remove();
+    }
   });
 })();
 
