@@ -14,10 +14,10 @@
      preview crawlers do not resolve relative paths. The image is served
      at exactly 1200x630 so it is never re-cropped in the message bubble.
 
-     The card is a real file in this repo rather than a remote transform:
-     same origin as the page, plain JPEG, 50KB, so there is no third-party
-     host, no WebP support question and no CDN cache to go stale. Swap
-     share-album.jpg for a photo export at the same size to change it. -->
+     This is the wedding photo itself, delivered by Cloudinary as a plain
+     JPEG cropped to 1200x630 with the faces kept in frame. share-album.jpg
+     stays in the repo as a same-origin fallback if this ever needs to
+     stop depending on Cloudinary. -->
 <link rel="canonical" href="https://xeraine.vercel.app/">
 <meta property="fb:app_id" content="914994698331323">
 <meta property="og:type" content="website">
@@ -26,24 +26,24 @@
 <meta property="og:url" content="https://xeraine.vercel.app/">
 <meta property="og:title" content="Xerxes &amp; Loraine · Our Wedding Photos">
 <meta property="og:description" content="Look through the album from 7 August 2026, and add the photos you took.">
-<meta property="og:image" content="https://xeraine.vercel.app/share-album.jpg">
-<meta property="og:image:secure_url" content="https://xeraine.vercel.app/share-album.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630/v1786335660/DSE04074_be20wb.jpg">
+<meta property="og:image:secure_url" content="https://res.cloudinary.com/dymdk9ysp/image/upload/f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630/v1786335660/DSE04074_be20wb.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Xerxes &amp; Loraine — our wedding photos, 7 August 2026">
+<meta property="og:image:alt" content="Xerxes and Loraine hand in hand at their reception">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Xerxes &amp; Loraine · Our Wedding Photos">
 <meta name="twitter:description" content="Look through the album from 7 August 2026, and add the photos you took.">
-<meta name="twitter:image" content="https://xeraine.vercel.app/share-album.jpg">
-<meta name="twitter:image:alt" content="Xerxes &amp; Loraine — our wedding photos, 7 August 2026">
+<meta name="twitter:image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630/v1786335660/DSE04074_be20wb.jpg">
+<meta name="twitter:image:alt" content="Xerxes and Loraine hand in hand at their reception">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <!-- itemprop tags are the fallback a few older WhatsApp and Skype builds
      read when they do not find Open Graph. Cheap insurance. -->
 <meta itemprop="name" content="Xerxes &amp; Loraine &middot; Our Wedding Photos">
 <meta itemprop="description" content="Look through the album from 7 August 2026, add the photos you took, and stay in touch.">
-<meta itemprop="image" content="https://xeraine.vercel.app/share-album.jpg">
+<meta itemprop="image" content="https://res.cloudinary.com/dymdk9ysp/image/upload/f_jpg,q_auto:good,c_fill,g_auto,w_1200,h_630/v1786335660/DSE04074_be20wb.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
@@ -181,21 +181,33 @@
   /* ============ HERO ============ */
   .hero{position:relative;background:var(--navy);}
   .hero img.bg{width:100%;height:52vh;min-height:300px;max-height:620px;object-fit:cover;}
-  .hero .scrim{position:absolute;inset:0;background:rgba(22,32,58,.55);}
+  /* Gradient rather than a flat wash: the photo stays bright at the top
+     where there is no text, and darkens through the middle and base so
+     white type holds up even against the dress and the white flowers.
+     The shadows below are belt-and-braces for the brightest frames. */
+  .hero .scrim{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,
+      rgba(22,32,58,.34) 0%,
+      rgba(22,32,58,.60) 42%,
+      rgba(22,32,58,.68) 72%,
+      rgba(22,32,58,.55) 100%);
+  }
   .hero .inner{
     position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
     justify-content:center;text-align:center;color:#fff;padding:24px;
+    text-shadow:0 2px 18px rgba(16,22,40,.6);
   }
   .hero .greeting{
     font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;
     color:#fff;margin-bottom:12px;
   }
   @media (min-width:760px){ .hero .greeting{font-size:30px;} }
-  .hero .kicker{font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--beige-deep);}
+  .hero .kicker{font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#F3EDE4;}
   .hero h1{font-size:38px;margin-top:10px;color:#fff;}
   @media (min-width:760px){ .hero h1{font-size:68px;} }
   .hero .meta{margin-top:14px;font-size:17px;font-weight:700;}
-  .hero .place{margin-top:4px;font-size:16px;color:rgba(255,255,255,.9);}
+  .hero .place{margin-top:4px;font-size:16px;color:#fff;}
   .hero-actions{background:var(--beige);padding:22px 0;}
   .hero-actions .btn-row{margin-top:0;}
 
@@ -433,7 +445,17 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
-  <img class="bg" id="heroImg" src="https://res.cloudinary.com/dymdk9ysp/image/upload/f_auto,q_auto,w_1600/v1779567339/preview_image_evwxst.jpg" alt="Xerxes and Loraine on their wedding day">
+  <!-- Cloudinary resizes per screen: a phone pulls ~800px, not the full file.
+       c_fill,g_auto keeps the faces in frame when the crop gets tight. -->
+  <img class="bg" id="heroImg"
+       src="https://res.cloudinary.com/dymdk9ysp/image/upload/f_auto,q_auto,c_fill,g_auto,w_1600,h_900/v1786335660/DSE04074_be20wb.jpg"
+       srcset="https://res.cloudinary.com/dymdk9ysp/image/upload/f_auto,q_auto,c_fill,g_auto,w_800,h_900/v1786335660/DSE04074_be20wb.jpg 800w,
+               https://res.cloudinary.com/dymdk9ysp/image/upload/f_auto,q_auto,c_fill,g_auto,w_1200,h_800/v1786335660/DSE04074_be20wb.jpg 1200w,
+               https://res.cloudinary.com/dymdk9ysp/image/upload/f_auto,q_auto,c_fill,g_auto,w_1600,h_900/v1786335660/DSE04074_be20wb.jpg 1600w,
+               https://res.cloudinary.com/dymdk9ysp/image/upload/f_auto,q_auto,c_fill,g_auto,w_2200,h_1100/v1786335660/DSE04074_be20wb.jpg 2200w"
+       sizes="100vw"
+       fetchpriority="high" decoding="async"
+       alt="Xerxes and Loraine hand in hand at their reception">
   <div class="scrim"></div>
   <div class="inner">
     <div class="greeting" id="greeting" hidden></div>
