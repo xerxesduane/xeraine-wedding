@@ -1047,10 +1047,20 @@ onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
 
 
 /* ============================ scroll reveal ============================= */
+/* threshold:0 on purpose. A percentage threshold can never be met by a
+   section taller than the viewport — the photo grid runs to ~10,000px, so
+   asking for 12% of it meant the reveal never fired and the whole album
+   sat at opacity:0: invisible, but still clickable. Any pixel entering
+   view is enough. */
 const io = new IntersectionObserver(es=>{
   es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
-},{threshold:.12});
+},{threshold:0});
 $$(".reveal").forEach(el=>io.observe(el));
+
+/* If IntersectionObserver is missing, show everything rather than hide it. */
+if(!("IntersectionObserver" in window))
+  document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+
 
 /* ============================ buttons =================================== */
 wire("#driveAllBtn",   SITE.driveAllPhotos, "#photosSetup",
